@@ -43,12 +43,12 @@ impl CPU {
 					let param = program[self.program_counter as usize];
 					self.program_counter += 1;
 					self.lda(param);
-				},
+				}
 				ops::TAX => self.tax(),
 				ops::INX => self.inx(),
 				ops::DEX => self.dex(),
 				0x00 => return,
-				_ => todo!()
+				_ => todo!(),
 			}
 		}
 	}
