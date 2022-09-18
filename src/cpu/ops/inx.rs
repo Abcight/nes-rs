@@ -1,15 +1,15 @@
-use super::CPU;
-
-pub const INX: u8 = 0xE8;
-
 // INX - Increment X Register
 // X,Z,N = X + 1
 // Adds one to the X register setting the zero and negative flags as appropriate.
-impl CPU {
-	pub fn inx(&mut self) {
-		self.register_x = self.register_x.overflowing_add(1).0;
-		self.set_zero_neg_flags(self.register_x);
-	}
+
+use super::AddressingMode;
+use super::Cpu;
+
+pub const IMOP: u8 = 0xE8;
+
+pub fn inx(cpu: &mut Cpu, _mode: &AddressingMode) {
+	cpu.register_x = cpu.register_x.overflowing_add(1).0;
+	cpu.set_zero_neg_flags(cpu.register_x);
 }
 
 #[cfg(test)]
@@ -18,17 +18,15 @@ mod test {
 
 	#[test]
 	fn test_inx_increment() {
-		let mut cpu = CPU::new();
-		cpu.register_x = 10;
-		cpu.interpret(vec![INX, 0x00]);
-		assert_eq!(cpu.register_x, 11)
+		let mut cpu = Cpu::new();
+		cpu.interpret(vec![IMOP, 0x00]);
+		assert_eq!(cpu.register_x, 1)
 	}
 
 	#[test]
 	fn test_inx_overflow() {
-		let mut cpu = CPU::new();
-		cpu.register_x = 0xff;
-		cpu.interpret(vec![INX, INX, 0x00]);
+		let mut cpu = Cpu::new();
+		cpu.interpret(vec![0xa9, 0xff, 0xaa, IMOP, IMOP, 0x00]);
 		assert_eq!(cpu.register_x, 1)
 	}
 }
