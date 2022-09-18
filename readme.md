@@ -12,7 +12,7 @@ Here you can see how many have already been implemented:
 	<tr>
 		<td>ADC🟥</td>
 		<td>AND🟥</td>
-		<td>ASL🟥</td>
+		<td>ASL🟩</td>
 		<td>BCC🟥</td>
 		<td>BCS🟥</td>
 		<td>BEQ🟥</td>
@@ -44,8 +44,8 @@ Here you can see how many have already been implemented:
 	<tr>
 		<td>JSR🟥</td>
 		<td>LDA🟩</td>
-		<td>LDX🟥</td>
-		<td>LDY🟥</td>
+		<td>LDX🟩</td>
+		<td>LDY🟩</td>
 		<td>LSR🟥</td>
 		<td>NOP🟥</td>
 		<td>ORA🟥</td>

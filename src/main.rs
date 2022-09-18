@@ -8,9 +8,9 @@ fn main() {
 	cpu.interpret(vec![
 		lda::IMOP,
 		0x03,      // Load 0x03 into register A
-		tax::IMOP, // Copy value from register A into register B
-		dex::IMOP, // Decrease value at register B by one
+		tax::IMOP, // Copy value from register A into register X
+		dex::IMOP, // Decrease value at register X by one
 		0x00,      // Break
 	]);
-	println!("{}", cpu.register_x); // Print the value stored in register B (2)
+	println!("{}", cpu.register_x); // Print the value stored in register X (2)
 }
