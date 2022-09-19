@@ -4,12 +4,13 @@
 
 use super::AddressingMode;
 use super::Cpu;
+use super::Memory;
 
 pub const IMOP: u8 = 0x29;
 
 pub fn and(cpu: &mut Cpu, mode: &AddressingMode) {
 	let addr = cpu.get_operand_address(mode);
-	let data = cpu.mem_read(addr);
+	let data = cpu.read(addr);
 	cpu.register_a &= data;
 	cpu.set_zero_neg_flags(cpu.register_a);
 }

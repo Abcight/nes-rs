@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 use lazy_static::lazy_static;
 
+use super::memory::*;
 use super::AddressingMode;
 use super::Cpu;
 

@@ -8,11 +8,10 @@ use super::Cpu;
 pub const IMOP: u8 = 0x0A;
 
 pub fn asl(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.register_a = cpu.register_a.rotate_left(1);
-	if cpu.register_a & 0b0000_0001 == 1 {
-		cpu.status |= 0b0000_0001;
-	}
-	cpu.register_a &= 0b1111_1110;
+	let mut data = cpu.register_a;
+	cpu.status.set_carry(data >> 7 == 1);
+	data <<= 1;
+	cpu.register_a = data;
 	cpu.set_zero_neg_flags(cpu.register_a);
 }
 
@@ -30,8 +29,8 @@ mod test {
 	#[test]
 	fn test_asl_overflow() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b1000_0001, IMOP, 0x00]);
+		cpu.interpret(vec![0xA9, 0b1000_0001, 0x0A, 0x00]);
 		assert_eq!(cpu.register_a, 2);
-		assert_eq!(cpu.status & 0b0000_0001, 1);
+		assert_eq!(*cpu.status & 0b0000_0001, 1);
 	}
 }
