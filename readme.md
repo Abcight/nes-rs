@@ -71,7 +71,7 @@ Here you can see how many have already been implemented:
 		<td>TSX🟥</td>
 		<td>TXA🟩</td>
 		<td>TXS🟥</td>
-		<td>TYA🟥</td>
+		<td>TYA🟩</td>
 	</tr>
 </table>
 
