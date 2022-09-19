@@ -12,6 +12,7 @@ pub mod lda;
 pub mod ldy;
 pub mod tax;
 pub mod asl;
+pub mod and;
 
 pub struct OpCodeDef {
 	pub len: u8,
@@ -75,6 +76,15 @@ lazy_static! {
 		map.insert(0x16, OpCodeDef::new(2, 6, AddressingMode::ZeroPageX, 	asl::asl));
 		map.insert(0x0E, OpCodeDef::new(3, 6, AddressingMode::Absolute, 	asl::asl));
 		map.insert(0x1E, OpCodeDef::new(3, 7, AddressingMode::AbsoluteX, 	asl::asl));
+		
+		map.insert(0x29, OpCodeDef::new(2, 2, AddressingMode::Immediate, 	and::and));
+		map.insert(0x25, OpCodeDef::new(2, 3, AddressingMode::ZeroPage, 	and::and));
+		map.insert(0x35, OpCodeDef::new(2, 4, AddressingMode::ZeroPageX, 	and::and));
+		map.insert(0x2D, OpCodeDef::new(3, 4, AddressingMode::Absolute, 	and::and));
+		map.insert(0x3D, OpCodeDef::new(3, 4, AddressingMode::AbsoluteX, 	and::and));
+		map.insert(0x39, OpCodeDef::new(3, 4, AddressingMode::AbsoluteY, 	and::and));
+		map.insert(0x21, OpCodeDef::new(2, 6, AddressingMode::IndirectX, 	and::and));
+		map.insert(0x31, OpCodeDef::new(2, 5, AddressingMode::IndirectY, 	and::and));
 		map
 	};
 }
