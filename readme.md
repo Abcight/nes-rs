@@ -67,9 +67,9 @@ Here you can see how many have already been implemented:
 		<td>STX🟥</td>
 		<td>STY🟥</td>
 		<td>TAX🟩</td>
-		<td>TAY🟥</td>
+		<td>TAY🟩</td>
 		<td>TSX🟥</td>
-		<td>TXA🟥</td>
+		<td>TXA🟩</td>
 		<td>TXS🟥</td>
 		<td>TYA🟥</td>
 	</tr>
