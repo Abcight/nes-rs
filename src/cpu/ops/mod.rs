@@ -12,6 +12,7 @@ pub mod ldx;
 pub mod lda;
 pub mod ldy;
 pub mod tax;
+pub mod tay;
 pub mod asl;
 pub mod and;
 
@@ -48,6 +49,7 @@ lazy_static! {
 	static ref INSTRUCTIONS: HashMap<u8, OpCodeDef> = {
 		let mut map = HashMap::new();
 		map.insert(0xAA, OpCodeDef::new(1, 2, AddressingMode::Implied, 		tax::tax));
+		map.insert(0xA8, OpCodeDef::new(1, 2, AddressingMode::Implied, 		tay::tay));
 		map.insert(0xE8, OpCodeDef::new(1, 2, AddressingMode::Implied, 		inx::inx));
 		map.insert(0xCA, OpCodeDef::new(1, 2, AddressingMode::Implied, 		dex::dex));
 
