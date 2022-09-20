@@ -89,7 +89,7 @@ impl Cpu {
 		self.register_a = 0;
 		self.register_x = 0;
 		self.register_y = 0;
-		self.status = CpuStatus(0);
+		self.status = CpuStatus(0b100100);
 		self.program_counter = self.read_u16(0xFFFC);
 	}
 
