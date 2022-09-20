@@ -39,7 +39,7 @@ Here you can see how many have already been implemented:
 		<td>INC🟥</td>
 		<td>INX🟩</td>
 		<td>INY🟩</td>
-		<td>JMP🟥</td>
+		<td>JMP🟩</td>
 	</tr>
 	<tr>
 		<td>JSR🟥</td>
