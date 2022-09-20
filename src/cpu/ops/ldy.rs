@@ -21,7 +21,7 @@ mod test {
 	use super::*;
 
 	#[test]
-	fn test_ldx_load_data() {
+	fn test_ldy_load_data() {
 		let mut cpu = Cpu::new();
 		cpu.interpret(vec![IMOP, 0x43, 0x00]);
 		assert_eq!(cpu.register_y, 0x43);
@@ -30,7 +30,7 @@ mod test {
 	}
 
 	#[test]
-	fn test_ldx_zero_flag() {
+	fn test_ldy_zero_flag() {
 		let mut cpu = Cpu::new();
 		cpu.interpret(vec![IMOP, 0x00, 0x00]);
 		assert!(*cpu.status & 0b0000_0010 == 0b10);
