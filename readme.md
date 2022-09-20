@@ -29,7 +29,7 @@ Here you can see how many have already been implemented:
 		<td>CLD🟩</td>
 		<td>CLI🟩</td>
 		<td>CLV🟩</td>
-		<td>CMP🟥</td>
+		<td>CMP🟩</td>
 		<td>CPX🟥</td>
 		<td>CPY🟥</td>
 		<td>DEC🟥</td>
