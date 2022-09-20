@@ -16,7 +16,7 @@ Here you can see how many have already been implemented:
 		<td>BCC🟩</td>
 		<td>BCS🟩</td>
 		<td>BEQ🟩</td>
-		<td>BIT🟥</td>
+		<td>BIT🟩</td>
 		<td>BMI🟩</td>
 		<td>BNE🟩</td>
 		<td>BPL🟩</td>
