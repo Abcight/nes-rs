@@ -22,7 +22,7 @@ Here you can see how many have already been implemented:
 		<td>BPL🟩</td>
 		<td>BRK🟩</td>
 		<td>BVC🟩</td>
-		<td>BVS🟥</td>
+		<td>BVS🟩</td>
 		<td>CLC🟥</td>
 	</tr>
 	<tr>

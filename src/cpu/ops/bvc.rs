@@ -17,14 +17,14 @@ mod test {
 	#[test]
 	fn test_bvc_clear() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0, 0x0a, IMOP, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![IMOP, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 4)
 	}
 
 	#[test]
 	fn test_bvc_set() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0xff, 0x0a, IMOP, 0x00, 0x00, 0xa9, 4, 0x00]);
-		assert_eq!(cpu.register_a, 4)
+		cpu.interpret(vec![0xa9, 0x50, 0x69, 0x50, IMOP, 0x00, 0x00, 0xa9, 4, 0x00]);
+		assert_eq!(cpu.register_a, 0x50 + 0x50)
 	}
 }
