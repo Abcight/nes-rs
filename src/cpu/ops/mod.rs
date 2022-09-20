@@ -36,6 +36,7 @@ pub mod cmp;
 pub mod dey;
 pub mod iny;
 pub mod jmp;
+pub mod dec;
 
 pub struct OpCodeDef {
 	pub len: u8,
@@ -157,6 +158,11 @@ lazy_static! {
 
 		map.insert(0x4C, OpCodeDef::new(3, 3, AddressingMode::Absolute, 	jmp::jmp));
 		map.insert(0x6C, OpCodeDef::new(3, 5, AddressingMode::Immediate, 	jmp::jmp));
+
+		map.insert(0xC6, OpCodeDef::new(2, 5, AddressingMode::ZeroPage, 	dec::dec));
+		map.insert(0xD6, OpCodeDef::new(2, 6, AddressingMode::ZeroPageX, 	dec::dec));
+		map.insert(0xCE, OpCodeDef::new(3, 6, AddressingMode::Absolute, 	dec::dec));
+		map.insert(0xDE, OpCodeDef::new(3, 7, AddressingMode::AbsoluteX, 	dec::dec));
 
 		map
 	};
