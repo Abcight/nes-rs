@@ -29,6 +29,7 @@ pub mod bvc;
 pub mod bvs;
 pub mod clc;
 pub mod bit;
+pub mod cld;
 
 pub struct OpCodeDef {
 	pub len: u8,
@@ -77,6 +78,7 @@ lazy_static! {
 		map.insert(0x50, OpCodeDef::new(2, 2, AddressingMode::Implied, 		bvc::bvc));
 		map.insert(0x70, OpCodeDef::new(2, 2, AddressingMode::Implied, 		bvs::bvs));
 		map.insert(0x18, OpCodeDef::new(1, 2, AddressingMode::Implied, 		clc::clc));
+		map.insert(0xD8, OpCodeDef::new(1, 2, AddressingMode::Implied, 		cld::cld));
 
 		map.insert(0xA9, OpCodeDef::new(2, 2, AddressingMode::Immediate, 	lda::lda));
 		map.insert(0xA5, OpCodeDef::new(2, 3, AddressingMode::ZeroPage, 	lda::lda));
