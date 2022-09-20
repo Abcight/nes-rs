@@ -83,6 +83,7 @@ That wouldn't be possible without having a set path in mind, so I've decided tha
 - [Call-A.P.P.L.E Obelisk 6502](https://www.callapple.org/obelisk-6502-registers/)
 - [Obelisk.me guide (archived)](https://web.archive.org/web/20210909190432/http://www.obelisk.me.uk/6502/)
 - [The Rust Programming Language](https://doc.rust-lang.org/book/)
+- [NesDev website](https://www.nesdev.org/))
 - [NES emulator e-book](https://bugzmanov.github.io/nes_ebook)
 
 I am following the afformentioned documents in order to learn about NES and Rust. This research wouldn't have come to fruition without these.
