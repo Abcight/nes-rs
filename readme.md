@@ -36,7 +36,7 @@ Here you can see how many have already been implemented:
 		<td>DEX🟩</td>
 		<td>DEY🟩</td>
 		<td>EOR🟥</td>
-		<td>INC🟥</td>
+		<td>INC🟩</td>
 		<td>INX🟩</td>
 		<td>INY🟩</td>
 		<td>JMP🟩</td>
