@@ -21,7 +21,7 @@ Here you can see how many have already been implemented:
 		<td>BNE🟩</td>
 		<td>BPL🟩</td>
 		<td>BRK🟩</td>
-		<td>BVC🟥</td>
+		<td>BVC🟩</td>
 		<td>BVS🟥</td>
 		<td>CLC🟥</td>
 	</tr>
