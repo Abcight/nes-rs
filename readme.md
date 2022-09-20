@@ -13,7 +13,7 @@ Here you can see how many have already been implemented:
 		<td>ADC🟩</td>
 		<td>AND🟩</td>
 		<td>ASL🟩</td>
-		<td>BCC🟥</td>
+		<td>BCC🟩</td>
 		<td>BCS🟥</td>
 		<td>BEQ🟥</td>
 		<td>BIT🟥</td>

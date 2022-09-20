@@ -93,6 +93,16 @@ impl Cpu {
 		self.program_counter = self.read_u16(0xFFFC);
 	}
 
+	pub fn branch_if(&mut self, condition: bool) {
+		if condition {
+			let jmp = self.read(self.program_counter) as i8;
+			self.program_counter =
+				self.program_counter
+				.wrapping_add(1)
+				.wrapping_add(jmp as u16);
+		}
+	}
+
 	fn set_zero_neg_flags(&mut self, result: u8) {
 		self.status.set_zero(result == 0);
 		self.status.set_negative(result & 0b1000_0000 != 0);
