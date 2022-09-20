@@ -16,6 +16,10 @@ impl CpuStatus {
 		}
 	}
 
+	fn get_flag(&self, shift: u8) -> bool {
+		self.0 & 0b0000_0001 << shift != 0
+	}
+
 	pub fn set_negative(&mut self, on: bool) {
 		self.set_flag(7, on);
 	}
@@ -42,6 +46,34 @@ impl CpuStatus {
 
 	pub fn set_carry(&mut self, on: bool) {
 		self.set_flag(0, on);
+	}
+
+	pub fn get_negative(&self) -> bool {
+		self.get_flag(7)
+	}
+
+	pub fn get_overflow(&self) -> bool {
+		self.get_flag(6)
+	}
+
+	pub fn get_break(&self) -> bool {
+		self.get_flag(4)
+	}
+
+	pub fn get_decimal(&self) -> bool {
+		self.get_flag(3)
+	}
+
+	pub fn get_interrupt(&self) -> bool {
+		self.get_flag(2)
+	}
+
+	pub fn get_zero(&self) -> bool {
+		self.get_flag(1)
+	}
+
+	pub fn get_carry(&self) -> bool {
+		self.get_flag(0)
 	}
 }
 

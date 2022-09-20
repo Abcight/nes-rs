@@ -10,7 +10,7 @@ So far I have only began working on emulating the [Obelisk 6502 chip instruction
 Here you can see how many have already been implemented:
 <table>
 	<tr>
-		<td>ADC🟥</td>
+		<td>ADC🟩</td>
 		<td>AND🟩</td>
 		<td>ASL🟩</td>
 		<td>BCC🟥</td>
