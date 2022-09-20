@@ -14,7 +14,7 @@ Here you can see how many have already been implemented:
 		<td>AND🟩</td>
 		<td>ASL🟩</td>
 		<td>BCC🟩</td>
-		<td>BCS🟥</td>
+		<td>BCS🟩</td>
 		<td>BEQ🟥</td>
 		<td>BIT🟥</td>
 		<td>BMI🟥</td>
