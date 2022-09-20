@@ -1,5 +1,5 @@
-// BCC - Branch if Carry Clear
-// If the carry flag is clear then add the relative displacement to the program counter to cause a branch to a new location.
+// BEQ - Branch if Equal
+// If the zero flag is set then add the relative displacement to the program counter to cause a branch to a new location.
 
 use super::AddressingMode;
 use super::Cpu;
