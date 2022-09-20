@@ -34,7 +34,7 @@ Here you can see how many have already been implemented:
 		<td>CPY🟥</td>
 		<td>DEC🟥</td>
 		<td>DEX🟩</td>
-		<td>DEY🟥</td>
+		<td>DEY🟩</td>
 		<td>EOR🟥</td>
 		<td>INC🟥</td>
 		<td>INX🟩</td>
