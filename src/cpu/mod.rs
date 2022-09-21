@@ -6,7 +6,7 @@ mod status;
 use status::*;
 
 const STACK: u16 = 0x0100;
-const STACK_RESET: u8 = 0xfd;
+const DEFAULT_STACK: u8 = 0xfd;
 
 pub enum AddressingMode {
 	Immediate,
@@ -39,7 +39,7 @@ impl Cpu {
 			register_y: 0,
 			status: CpuStatus(0),
 			program_counter: 0,
-			stack_pointer: STACK_RESET,
+			stack_pointer: DEFAULT_STACK,
 			memory: [0; 0xFFFF],
 		}
 	}
@@ -71,7 +71,7 @@ impl Cpu {
 		self.register_x = 0;
 		self.register_y = 0;
 		self.status = CpuStatus(0b100100);
-		self.stack_pointer = STACK_RESET;
+		self.stack_pointer = DEFAULT_STACK;
 		self.program_counter = self.read_u16(0xFFFC);
 	}
 
@@ -85,7 +85,30 @@ impl Cpu {
 		}
 	}
 
-		fn get_operand_address(&self, mode: &AddressingMode) -> u16 {
+	fn pop(&mut self) -> u8 {
+		self.stack_pointer = self.stack_pointer.wrapping_add(1);
+		self.read((STACK as u16) + self.stack_pointer as u16)
+	}
+
+	fn push(&mut self, data: u8) {
+		self.write((STACK as u16) + self.stack_pointer as u16, data);
+		self.stack_pointer = self.stack_pointer.wrapping_sub(1)
+	}
+
+	fn push_u16(&mut self, data: u16) {
+		let hi = (data >> 8) as u8;
+		let lo = (data & 0xff) as u8;
+		self.push(hi);
+		self.push(lo);
+	}
+
+	fn pop_u16(&mut self) -> u16 {
+		let lo = self.pop() as u16;
+		let hi = self.pop() as u16;
+		hi << 8 | lo
+	}
+
+	fn get_operand_address(&self, mode: &AddressingMode) -> u16 {
 		match mode {
 			AddressingMode::Immediate => self.program_counter,
 			AddressingMode::ZeroPage => self.read(self.program_counter) as u16,
@@ -125,29 +148,6 @@ impl Cpu {
 			}
 		}
 	}
-
-	fn pop(&mut self) -> u8 {
-        self.stack_pointer = self.stack_pointer.wrapping_add(1);
-        self.read((STACK as u16) + self.stack_pointer as u16)
-    }
-
-    fn push(&mut self, data: u8) {
-        self.write((STACK as u16) + self.stack_pointer as u16, data);
-        self.stack_pointer = self.stack_pointer.wrapping_sub(1)
-    }
-
-    fn push_u16(&mut self, data: u16) {
-        let hi = (data >> 8) as u8;
-        let lo = (data & 0xff) as u8;
-        self.push(hi);
-        self.push(lo);
-    }
-
-    fn pop_u16(&mut self) -> u16 {
-        let lo = self.pop() as u16;
-        let hi = self.pop() as u16;
-        hi << 8 | lo
-    }
 
 	fn set_zero_neg_flags(&mut self, result: u8) {
 		self.status.set_zero(result == 0);

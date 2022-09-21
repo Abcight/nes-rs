@@ -58,7 +58,7 @@ Here you can see how many have already been implemented:
 		<td>RTI🟥</td>
 	</tr>
 	<tr>
-		<td>RTS🟥</td>
+		<td>RTS🟩</td>
 		<td>SBC🟥</td>
 		<td>SEC🟥</td>
 		<td>SED🟥</td>
