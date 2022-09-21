@@ -59,7 +59,7 @@ Here you can see how many have already been implemented:
 	</tr>
 	<tr>
 		<td>RTS🟩</td>
-		<td>SBC🟥</td>
+		<td>SBC🟩</td>
 		<td>SEC🟥</td>
 		<td>SED🟥</td>
 		<td>SEI🟥</td>
