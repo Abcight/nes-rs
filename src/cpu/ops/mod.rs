@@ -42,6 +42,7 @@ pub mod rts;
 pub mod sbc;
 pub mod cpx;
 pub mod cpy;
+pub mod eor;
 
 pub struct OpCodeDef {
 	pub len: u8,
@@ -132,6 +133,15 @@ lazy_static! {
 		map.insert(0x39, OpCodeDef::new(3, 4, AddressingMode::AbsoluteY, 	and::and));
 		map.insert(0x21, OpCodeDef::new(2, 6, AddressingMode::IndirectX, 	and::and));
 		map.insert(0x31, OpCodeDef::new(2, 5, AddressingMode::IndirectY, 	and::and));
+
+		map.insert(0x49, OpCodeDef::new(2, 2, AddressingMode::Immediate, 	eor::eor));
+		map.insert(0x45, OpCodeDef::new(2, 3, AddressingMode::ZeroPage, 	eor::eor));
+		map.insert(0x55, OpCodeDef::new(2, 4, AddressingMode::ZeroPageX, 	eor::eor));
+		map.insert(0x4D, OpCodeDef::new(3, 4, AddressingMode::Absolute, 	eor::eor));
+		map.insert(0x5D, OpCodeDef::new(3, 4, AddressingMode::AbsoluteX, 	eor::eor));
+		map.insert(0x59, OpCodeDef::new(3, 4, AddressingMode::AbsoluteY, 	eor::eor));
+		map.insert(0x41, OpCodeDef::new(2, 6, AddressingMode::IndirectX, 	eor::eor));
+		map.insert(0x51, OpCodeDef::new(2, 5, AddressingMode::IndirectY, 	eor::eor));
 		
 		map.insert(0x85, OpCodeDef::new(2, 3, AddressingMode::ZeroPage, 	sta::sta));
 		map.insert(0x95, OpCodeDef::new(2, 4, AddressingMode::ZeroPageX, 	sta::sta));
