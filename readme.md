@@ -30,7 +30,7 @@ Here you can see how many have already been implemented:
 		<td>CLI🟩</td>
 		<td>CLV🟩</td>
 		<td>CMP🟩</td>
-		<td>CPX🟥</td>
+		<td>CPX🟩</td>
 		<td>CPY🟥</td>
 		<td>DEC🟩</td>
 		<td>DEX🟩</td>
