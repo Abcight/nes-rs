@@ -46,6 +46,7 @@ pub mod eor;
 pub mod sec;
 pub mod sed;
 pub mod sei;
+pub mod stx;
 
 pub struct OpCodeDef {
 	pub len: u8,
@@ -207,6 +208,10 @@ lazy_static! {
 		map.insert(0xF6, OpCodeDef::new(2, 6, AddressingMode::ZeroPageX, 	inc::inc));
 		map.insert(0xEE, OpCodeDef::new(3, 6, AddressingMode::Absolute, 	inc::inc));
 		map.insert(0xFE, OpCodeDef::new(3, 7, AddressingMode::AbsoluteX, 	inc::inc));
+
+		map.insert(0x86, OpCodeDef::new(2, 3, AddressingMode::ZeroPage, 	stx::stx));
+		map.insert(0x96, OpCodeDef::new(2, 4, AddressingMode::ZeroPageY, 	stx::stx));
+		map.insert(0x8E, OpCodeDef::new(3, 4, AddressingMode::Absolute, 	stx::stx));
 
 		map
 	};
