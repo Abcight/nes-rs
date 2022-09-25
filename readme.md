@@ -42,7 +42,7 @@ Here you can see how many have already been implemented:
 		<td>JMP🟩</td>
 	</tr>
 	<tr>
-		<td>JSR🟥</td>
+		<td>JSR🟩</td>
 		<td>LDA🟩</td>
 		<td>LDX🟩</td>
 		<td>LDY🟩</td>
