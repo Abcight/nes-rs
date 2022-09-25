@@ -51,7 +51,7 @@ Here you can see how many have already been implemented:
 		<td>ORA🟩</td>
 		<td>PHA🟩</td>
 		<td>PHP🟥</td>
-		<td>PLA🟥</td>
+		<td>PLA🟩</td>
 		<td>PLP🟥</td>
 		<td>ROL🟥</td>
 		<td>ROR🟥</td>
