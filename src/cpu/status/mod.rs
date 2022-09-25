@@ -29,6 +29,15 @@ impl CpuStatus {
 	}
 
 	pub fn set_break(&mut self, on: bool) {
+		self.set_break_max(on);
+		self.set_break_min(on);
+	}
+
+	pub fn set_break_max(&mut self, on: bool) {
+		self.set_flag(5, on);
+	}
+
+	pub fn set_break_min(&mut self, on: bool) {
 		self.set_flag(4, on);
 	}
 
