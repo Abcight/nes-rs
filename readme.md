@@ -53,7 +53,7 @@ Here you can see how many have already been implemented:
 		<td>PHP🟥</td>
 		<td>PLA🟩</td>
 		<td>PLP🟩</td>
-		<td>ROL🟥</td>
+		<td>ROL🟩</td>
 		<td>ROR🟥</td>
 		<td>RTI🟥</td>
 	</tr>
