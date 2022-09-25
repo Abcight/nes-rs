@@ -49,7 +49,7 @@ Here you can see how many have already been implemented:
 		<td>LSR🟩</td>
 		<td>NOP🟩</td>
 		<td>ORA🟩</td>
-		<td>PHA🟥</td>
+		<td>PHA🟩</td>
 		<td>PHP🟥</td>
 		<td>PLA🟥</td>
 		<td>PLP🟥</td>

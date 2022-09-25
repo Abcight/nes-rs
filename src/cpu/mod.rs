@@ -5,8 +5,8 @@ pub use memory::*;
 mod status;
 use status::*;
 
-const STACK: u16 = 0x0100;
-const DEFAULT_STACK: u8 = 0xfd;
+pub const STACK: u16 = 0x0100;
+pub const DEFAULT_STACK: u8 = 0xfd;
 
 pub enum AddressingMode {
 	Immediate,
