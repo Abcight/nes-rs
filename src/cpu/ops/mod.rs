@@ -52,6 +52,7 @@ pub mod tsx;
 pub mod txs;
 pub mod jsr;
 pub mod lsr;
+pub mod ora;
 
 pub struct OpCodeDef {
 	pub len: u8,
@@ -231,6 +232,15 @@ lazy_static! {
 		map.insert(0x56, OpCodeDef::new(2, 6, AddressingMode::ZeroPageX, 	lsr::lsr_m));
 		map.insert(0x4E, OpCodeDef::new(3, 6, AddressingMode::Absolute, 	lsr::lsr_m));
 		map.insert(0x5E, OpCodeDef::new(3, 7, AddressingMode::AbsoluteX, 	lsr::lsr_m));
+
+		map.insert(0x09, OpCodeDef::new(2, 2, AddressingMode::Immediate, 	ora::ora));
+		map.insert(0x05, OpCodeDef::new(2, 3, AddressingMode::ZeroPage, 	ora::ora));
+		map.insert(0x15, OpCodeDef::new(2, 4, AddressingMode::ZeroPageX, 	ora::ora));
+		map.insert(0x0D, OpCodeDef::new(3, 4, AddressingMode::Absolute, 	ora::ora));
+		map.insert(0x1D, OpCodeDef::new(3, 4, AddressingMode::AbsoluteX, 	ora::ora));
+		map.insert(0x19, OpCodeDef::new(3, 4, AddressingMode::AbsoluteY, 	ora::ora));
+		map.insert(0x01, OpCodeDef::new(2, 6, AddressingMode::IndirectX, 	ora::ora));
+		map.insert(0x11, OpCodeDef::new(2, 5, AddressingMode::IndirectY, 	ora::ora));
 
 		map
 	};

@@ -48,7 +48,7 @@ Here you can see how many have already been implemented:
 		<td>LDY🟩</td>
 		<td>LSR🟩</td>
 		<td>NOP🟩</td>
-		<td>ORA🟥</td>
+		<td>ORA🟩</td>
 		<td>PHA🟥</td>
 		<td>PHP🟥</td>
 		<td>PLA🟥</td>
