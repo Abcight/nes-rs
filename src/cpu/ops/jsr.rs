@@ -5,6 +5,7 @@ use super::AddressingMode;
 use super::Cpu;
 use super::Memory;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0x20;
 
 pub fn jsr(cpu: &mut Cpu, _mode: &AddressingMode) {

@@ -4,6 +4,7 @@
 use super::AddressingMode;
 use super::Cpu;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0x40;
 
 pub fn rti(cpu: &mut Cpu, _mode: &AddressingMode) {

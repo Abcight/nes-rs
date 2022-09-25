@@ -5,6 +5,7 @@
 use super::AddressingMode;
 use super::Cpu;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0xAA;
 
 pub fn tax(cpu: &mut Cpu, _mode: &AddressingMode) {

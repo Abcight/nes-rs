@@ -5,6 +5,7 @@ use super::AddressingMode;
 use super::Cpu;
 use super::Memory;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0x48;
 
 pub fn pha(cpu: &mut Cpu, _mode: &AddressingMode) {

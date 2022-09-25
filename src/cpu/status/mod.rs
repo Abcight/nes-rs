@@ -65,14 +65,17 @@ impl CpuStatus {
 		self.get_flag(6)
 	}
 
+	#[allow(dead_code)]
 	pub fn get_break(&self) -> bool {
 		self.get_flag(4)
 	}
 
+	#[allow(dead_code)]
 	pub fn get_decimal(&self) -> bool {
 		self.get_flag(3)
 	}
 
+	#[allow(dead_code)]
 	pub fn get_interrupt(&self) -> bool {
 		self.get_flag(2)
 	}

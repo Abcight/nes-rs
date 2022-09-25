@@ -5,6 +5,7 @@
 use super::AddressingMode;
 use super::Cpu;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0x88;
 
 pub fn dey(cpu: &mut Cpu, _mode: &AddressingMode) {

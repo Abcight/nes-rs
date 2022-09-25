@@ -5,6 +5,7 @@
 use super::AddressingMode;
 use super::Cpu;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0xF8;
 
 pub fn sed(cpu: &mut Cpu, _mode: &AddressingMode) {

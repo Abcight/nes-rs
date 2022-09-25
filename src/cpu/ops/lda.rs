@@ -6,6 +6,7 @@ use super::AddressingMode;
 use super::Cpu;
 use super::Memory;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0xa9;
 
 pub fn lda(cpu: &mut Cpu, mode: &AddressingMode) {

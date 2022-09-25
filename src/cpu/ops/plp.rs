@@ -4,6 +4,7 @@
 use super::AddressingMode;
 use super::Cpu;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0x28;
 
 pub fn plp(cpu: &mut Cpu, _mode: &AddressingMode) {

@@ -6,6 +6,7 @@ use super::AddressingMode;
 use super::Cpu;
 use super::Memory;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0x84;
 
 pub fn sty(cpu: &mut Cpu, mode: &AddressingMode) {

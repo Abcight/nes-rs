@@ -5,6 +5,7 @@
 use super::AddressingMode;
 use super::Cpu;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0xB8;
 
 pub fn clv(cpu: &mut Cpu, _mode: &AddressingMode) {

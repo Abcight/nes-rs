@@ -4,6 +4,7 @@
 use super::AddressingMode;
 use super::Cpu;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0xD0;
 
 pub fn bne(cpu: &mut Cpu, _mode: &AddressingMode) {

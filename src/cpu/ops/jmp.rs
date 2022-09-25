@@ -6,6 +6,7 @@ use super::AddressingMode;
 use super::Cpu;
 use super::Memory;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0x4C;
 
 pub fn jmp(cpu: &mut Cpu, mode: &AddressingMode) {

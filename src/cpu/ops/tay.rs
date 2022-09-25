@@ -5,6 +5,7 @@
 use super::AddressingMode;
 use super::Cpu;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0xA8;
 
 pub fn tay(cpu: &mut Cpu, _mode: &AddressingMode) {

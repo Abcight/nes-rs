@@ -6,59 +6,18 @@ use super::memory::*;
 use super::AddressingMode;
 use super::Cpu;
 
-pub mod dex;
-pub mod inx;
-pub mod ldx;
-pub mod lda;
-pub mod ldy;
-pub mod tax;
-pub mod tay;
-pub mod asl;
-pub mod and;
-pub mod txa;
-pub mod tya;
-pub mod sta;
-pub mod adc;
-pub mod bcc;
-pub mod bcs;
-pub mod beq;
-pub mod bmi;
-pub mod bne;
-pub mod bpl;
-pub mod bvc;
-pub mod bvs;
-pub mod clc;
-pub mod bit;
-pub mod cld;
-pub mod cli;
-pub mod clv;
-pub mod cmp;
-pub mod dey;
-pub mod iny;
-pub mod jmp;
-pub mod dec;
-pub mod inc;
-pub mod rts;
-pub mod sbc;
-pub mod cpx;
-pub mod cpy;
-pub mod eor;
-pub mod sec;
-pub mod sed;
-pub mod sei;
-pub mod stx;
-pub mod sty;
-pub mod tsx;
-pub mod txs;
-pub mod jsr;
-pub mod lsr;
-pub mod ora;
-pub mod pha;
-pub mod pla;
-pub mod plp;
-pub mod rol;
-pub mod ror;
-pub mod rti;
+#[macro_export]
+macro_rules! incl {
+	( $( $x:ident ),* ) => { $(pub mod $x;)* };
+}
+
+incl!(
+	//						 nop			php		  brk
+	adc, and, asl, bcc, bcs, beq, bit, bmi, bne, bpl,	   bvc, bvs, clc,
+	cld, cli, clv, cmp, cpx, cpy, dec, dex, dey, eor, inc, inx, iny, jmp,
+	jsr, lda, ldx, ldy, lsr, 	  ora, pha, 	 pla, plp, rol, ror, rti,
+	rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya
+);
 
 pub struct OpCodeDef {
 	pub len: u8,
@@ -268,11 +227,7 @@ lazy_static! {
 	};
 }
 
-#[rustfmt::skip]
 pub fn get_instruction_def<'a>(code: u8) -> &'a OpCodeDef {
-	if let Some(def) = INSTRUCTIONS.get(&code) {
-		def
-	} else {
-		panic!("Unsupported code {}", code);
-	}
+	let err = &format!("Unsupported code {}", code);
+	INSTRUCTIONS.get(&code).expect(err)
 }

@@ -5,6 +5,7 @@ use super::AddressingMode;
 use super::Cpu;
 use super::Memory;
 
+#[allow(dead_code)]
 pub const IMOP: u8 = 0x6A;
 
 pub fn ror_a(cpu: &mut Cpu, _mode: &AddressingMode) {
