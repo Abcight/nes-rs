@@ -57,6 +57,7 @@ pub mod pha;
 pub mod pla;
 pub mod plp;
 pub mod rol;
+pub mod ror;
 
 pub struct OpCodeDef {
 	pub len: u8,
@@ -254,6 +255,12 @@ lazy_static! {
 		map.insert(0x36, OpCodeDef::new(2, 6, AddressingMode::ZeroPageX, 	rol::rol_m));
 		map.insert(0x2E, OpCodeDef::new(3, 6, AddressingMode::Absolute, 	rol::rol_m));
 		map.insert(0x3E, OpCodeDef::new(3, 7, AddressingMode::AbsoluteX, 	rol::rol_m));
+
+		map.insert(0x6A, OpCodeDef::new(1, 2, AddressingMode::Implied,		ror::ror_a));
+		map.insert(0x66, OpCodeDef::new(2, 5, AddressingMode::ZeroPage,		ror::ror_m));
+		map.insert(0x76, OpCodeDef::new(2, 6, AddressingMode::ZeroPageX,	ror::ror_m));
+		map.insert(0x6E, OpCodeDef::new(3, 6, AddressingMode::Absolute,		ror::ror_m));
+		map.insert(0x7E, OpCodeDef::new(3, 7, AddressingMode::AbsoluteX,	ror::ror_m));
 
 		map
 	};
