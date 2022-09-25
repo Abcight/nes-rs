@@ -62,7 +62,7 @@ Here you can see how many have already been implemented:
 		<td>SBC🟩</td>
 		<td>SEC🟩</td>
 		<td>SED🟩</td>
-		<td>SEI🟥</td>
+		<td>SEI🟩</td>
 		<td>STA🟩</td>
 		<td>STX🟥</td>
 		<td>STY🟥</td>
