@@ -75,6 +75,38 @@ Here you can see how many have already been implemented:
 	</tr>
 </table>
 
+Additionally, the chip shipped with certain unofficial opcodes that were left unused by design. However, some games still use these undocumented operations, so I am going to implement them for the sake of completeness. You can see the progress on that here:
+<table>
+	<tr>
+		<td>AAC🟥</td>
+		<td>AAX🟥</td>
+		<td>ARR🟥</td>
+		<td>ASR🟥</td>
+		<td>ATX🟥</td>
+		<td>AXA🟥</td>
+		<td>AXS🟥</td>
+		<td>DCP🟥</td>
+		<td>DOP🟥</td>
+		<td>ISC🟥</td>
+		<td>KIL🟥</td>
+		<td>LAR🟥</td>
+		<td>LAX🟥</td>
+		<td>NOP🟥</td>
+	</tr>
+	<tr>
+		<td>RLA🟥</td>
+		<td>RRA🟥</td>
+		<td>SBC🟥</td>
+		<td>SLO🟥</td>
+		<td>SRE🟥</td>
+		<td>SXA🟥</td>
+		<td>SYA🟥</td>
+		<td>TOP🟥</td>
+		<td>XAA🟥</td>
+		<td>XAS🟥</td>
+	</tr>
+</table>
+
 ## Goals
 My grandest goal is that of building a greater understanding of NES and its inner workings, as well as deepening my knowledge of Rust.
 That wouldn't be possible without having a set path in mind, so I've decided that by the end of this learning experience I want to have an emulator capable of running the "Super Mario Bros".
