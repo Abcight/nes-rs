@@ -8,10 +8,10 @@ macro_rules! incl {
 }
 
 incl!(
-	//						 nop			php		  brk
+	//						 nop					  brk
 	adc, and, asl, bcc, bcs, beq, bit, bmi, bne, bpl,	   bvc, bvs, clc,
 	cld, cli, clv, cmp, cpx, cpy, dec, dex, dey, eor, inc, inx, iny, jmp,
-	jsr, lda, ldx, ldy, lsr, 	  ora, pha, 	 pla, plp, rol, ror, rti,
+	jsr, lda, ldx, ldy, lsr, 	  ora, pha, php, pla, plp, rol, ror, rti,
 	rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya
 );
 
@@ -87,6 +87,7 @@ map!(
 	PLA, 0x68, 1, 4, AddressingMode::Implied,		pla::pla,
 	PLP, 0x28, 1, 4, AddressingMode::IndirectY,		plp::plp,
 	RTI, 0x40, 1, 6, AddressingMode::Implied,		rti::rti,
+	PHP, 0x08, 1, 3, AddressingMode::Implied,		php::php,
 
 	LDA1, 0xA9, 2, 2, AddressingMode::Immediate,	lda::lda,
 	LDA2, 0xA5, 2, 3, AddressingMode::ZeroPage,		lda::lda,
