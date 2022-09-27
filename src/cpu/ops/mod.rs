@@ -210,6 +210,7 @@ map!(
 	SBC6,	0xF9, 3, 4, AbsoluteY, 	sbc,
 	SBC7,	0xE1, 2, 6, IndirectX, 	sbc,
 	SBC8,	0xF1, 2, 5, IndirectY, 	sbc,
+	SBC9,	0xEB, 2, 2, Immediate,	sbc,
 
 	BIT1,	0x24, 2, 3, ZeroPage, 	bit,
 	BIT2,	0x2C, 3, 4, Absolute, 	bit,
