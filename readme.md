@@ -82,7 +82,7 @@ Additionally, the chip shipped with certain unofficial opcodes that were left un
 		<td>AAX🟩</td>
 		<td>ARR🟩</td>
 		<td>ASR🟩</td>
-		<td>ATX🟥</td>
+		<td>ATX🟩</td>
 		<td>AXA🟥</td>
 		<td>AXS🟥</td>
 		<td>DCP🟥</td>
