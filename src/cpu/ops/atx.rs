@@ -1,4 +1,4 @@
-// ND byte with accumulator
+// AND byte with accumulator
 // Perform a logical AND on byte with accumulator, then transfer accumulator to X register.
 
 use super::AddressingMode;

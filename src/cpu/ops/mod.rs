@@ -15,7 +15,7 @@ incl!(
 	rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
 
 	// undocumented opcodes
-	aac, aax, arr, asr, atx
+	aac, aax, arr, asr, atx, axa
 );
 
 pub struct OpCodeDef {
@@ -271,5 +271,8 @@ map!(
 	AAX1,	0x87, 2, 3, ZeroPage,	aax::aax,
 	AAX2,	0x97, 2, 4, ZeroPageY,	aax::aax,
 	AAX3,	0x83, 2, 6, IndirectX,	aax::aax,
-	AAX4,	0x8F, 3, 4, Absolute,	aax::aax
+	AAX4,	0x8F, 3, 4, Absolute,	aax::aax,
+
+	AXA1,	0x9F, 3, 5, AbsoluteY,	axa::axa_ab,
+	AXA2,	0x93, 2, 6, IndirectY,	axa::axa_in
 );
