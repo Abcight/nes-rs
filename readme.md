@@ -78,7 +78,7 @@ Here you can see how many have already been implemented:
 Additionally, the chip shipped with certain unofficial opcodes that were left unused by design. However, some games still use these undocumented operations, so I am going to implement them for the sake of completeness. You can see the progress on that here:
 <table>
 	<tr>
-		<td>AAC🟥</td>
+		<td>AAC🟩</td>
 		<td>AAX🟥</td>
 		<td>ARR🟥</td>
 		<td>ASR🟥</td>

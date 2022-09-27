@@ -8,11 +8,14 @@ macro_rules! incl {
 }
 
 incl!(
-	//						 nop					  brk
+	// official opcodes		(nop)					 (brk)
 	adc, and, asl, bcc, bcs, beq, bit, bmi, bne, bpl,	   bvc, bvs, clc,
 	cld, cli, clv, cmp, cpx, cpy, dec, dex, dey, eor, inc, inx, iny, jmp,
 	jsr, lda, ldx, ldy, lsr, 	  ora, pha, php, pla, plp, rol, ror, rti,
-	rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya
+	rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
+
+	// undocumented opcodes
+	aac
 );
 
 pub struct OpCodeDef {
@@ -117,7 +120,7 @@ map!(
 	TOP4, 0x5C, 3, 4, AddressingMode::AbsoluteX,	|_,_|{},
 	TOP5, 0x7C, 3, 4, AddressingMode::AbsoluteX,	|_,_|{},
 	TOP6, 0xDC, 3, 4, AddressingMode::AbsoluteX,	|_,_|{},
-	TOP7, 0xCC, 3, 4, AddressingMode::AbsoluteX,	|_,_|{},
+	TOP7, 0xFC, 3, 4, AddressingMode::AbsoluteX,	|_,_|{},
 
 	LDA1, 0xA9, 2, 2, AddressingMode::Immediate,	lda::lda,
 	LDA2, 0xA5, 2, 3, AddressingMode::ZeroPage,		lda::lda,
@@ -256,5 +259,8 @@ map!(
 	ROR_M1, 0x66, 2, 5, AddressingMode::ZeroPage,	ror::ror_m,
 	ROR_M2, 0x76, 2, 6, AddressingMode::ZeroPageX,	ror::ror_m,
 	ROR_M3, 0x6E, 3, 6, AddressingMode::Absolute,	ror::ror_m,
-	ROR_M4, 0x7E, 3, 7, AddressingMode::AbsoluteX,	ror::ror_m
+	ROR_M4, 0x7E, 3, 7, AddressingMode::AbsoluteX,	ror::ror_m,
+
+	AAC1, 0x0B, 2, 2, AddressingMode::Immediate, aac::aac,
+	AAC2, 0x2B, 2, 2, AddressingMode::Immediate, aac::aac
 );
