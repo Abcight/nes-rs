@@ -111,6 +111,14 @@ map!(
 	DOP13,	0xE2, 2, 2, AddressingMode::Immediate,	|_,_|{},
 	DOP14,	0xF4, 2, 4, AddressingMode::ZeroPageX,	|_,_|{},
 
+	TOP1, 0x0C, 3, 4, AddressingMode::Absolute,		|_,_|{},
+	TOP2, 0x1C, 3, 4, AddressingMode::AbsoluteX,	|_,_|{},
+	TOP3, 0x3C, 3, 4, AddressingMode::AbsoluteX,	|_,_|{},
+	TOP4, 0x5C, 3, 4, AddressingMode::AbsoluteX,	|_,_|{},
+	TOP5, 0x7C, 3, 4, AddressingMode::AbsoluteX,	|_,_|{},
+	TOP6, 0xDC, 3, 4, AddressingMode::AbsoluteX,	|_,_|{},
+	TOP7, 0xCC, 3, 4, AddressingMode::AbsoluteX,	|_,_|{},
+
 	LDA1, 0xA9, 2, 2, AddressingMode::Immediate,	lda::lda,
 	LDA2, 0xA5, 2, 3, AddressingMode::ZeroPage,		lda::lda,
 	LDA3, 0xB5, 2, 4, AddressingMode::ZeroPageX,	lda::lda,
