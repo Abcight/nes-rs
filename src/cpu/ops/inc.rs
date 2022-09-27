@@ -9,10 +9,15 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xE6;
 
-pub fn inc(cpu: &mut Cpu, mode: &AddressingMode) {
+pub fn inc_ret(cpu: &mut Cpu, mode: &AddressingMode) -> u8 {
 	let addr = cpu.get_operand_address(mode);
 	let mut data = cpu.read(addr);
 	data = data.wrapping_add(1);
 	cpu.write(addr, data);
 	cpu.set_zero_neg_flags(data);
+	data
+}
+
+pub fn inc(cpu: &mut Cpu, mode: &AddressingMode) {
+	inc_ret(cpu, mode);
 }
