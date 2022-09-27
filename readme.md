@@ -88,7 +88,7 @@ Additionally, the chip shipped with certain unofficial opcodes that were left un
 		<td>DCP🟩</td>
 		<td>DOP🟩</td>
 		<td>ISC🟥</td>
-		<td>KIL🟥</td>
+		<td>KIL🟩</td>
 		<td>LAR🟥</td>
 		<td>LAX🟥</td>
 		<td>NOP🟩</td>
