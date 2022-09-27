@@ -85,7 +85,7 @@ Additionally, the chip shipped with certain unofficial opcodes that were left un
 		<td>ATX🟩</td>
 		<td>AXA🟩</td>
 		<td>AXS🟩</td>
-		<td>DCP🟥</td>
+		<td>DCP🟩</td>
 		<td>DOP🟩</td>
 		<td>ISC🟥</td>
 		<td>KIL🟥</td>
