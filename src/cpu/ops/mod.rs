@@ -15,7 +15,7 @@ incl!(
 	rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
 
 	// undocumented opcodes
-	aac, aax, arr
+	aac, aax, arr, asr
 );
 
 pub struct OpCodeDef {
@@ -92,6 +92,7 @@ map!(
 	RTI,	0x40, 1, 6, Implied,	rti::rti,
 	PHP,	0x08, 1, 3, Implied,	php::php,
 	AAR,	0x6B, 2, 2, Immediate,	arr::arr,
+	ASR,	0x4B, 2, 2, Immediate,	asr::asr,
 
 	NOP1,	0xEA, 1, 2, Implied,	nop::nop,
 	NOP2,	0x1A, 1, 2, Implied,	nop::nop,
