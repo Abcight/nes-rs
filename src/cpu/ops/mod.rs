@@ -55,7 +55,6 @@ macro_rules! map {
 }
 
 map!(
-	NOP, 0xEA, 1, 2, AddressingMode::Implied,		|_,_|{},
 	TAX, 0xAA, 1, 2, AddressingMode::Implied,		tax::tax,
 	TAY, 0xA8, 1, 2, AddressingMode::Implied,		tay::tay,
 	INX, 0xE8, 1, 2, AddressingMode::Implied,		inx::inx,
@@ -88,6 +87,14 @@ map!(
 	PLP, 0x28, 1, 4, AddressingMode::IndirectY,		plp::plp,
 	RTI, 0x40, 1, 6, AddressingMode::Implied,		rti::rti,
 	PHP, 0x08, 1, 3, AddressingMode::Implied,		php::php,
+
+	NOP1, 0xEA, 1, 2, AddressingMode::Implied,		|_,_|{},
+	NOP2, 0x1A, 1, 2, AddressingMode::Implied,		|_,_|{},
+	NOP3, 0x3A, 1, 2, AddressingMode::Implied,		|_,_|{},
+	NOP4, 0x5A, 1, 2, AddressingMode::Implied,		|_,_|{},
+	NOP5, 0x7A, 1, 2, AddressingMode::Implied,		|_,_|{},
+	NOP6, 0xDA, 1, 2, AddressingMode::Implied,		|_,_|{},
+	NOP7, 0xFA, 1, 2, AddressingMode::Implied,		|_,_|{},
 
 	LDA1, 0xA9, 2, 2, AddressingMode::Immediate,	lda::lda,
 	LDA2, 0xA5, 2, 3, AddressingMode::ZeroPage,		lda::lda,

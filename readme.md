@@ -91,7 +91,7 @@ Additionally, the chip shipped with certain unofficial opcodes that were left un
 		<td>KIL🟥</td>
 		<td>LAR🟥</td>
 		<td>LAX🟥</td>
-		<td>NOP🟥</td>
+		<td>NOP🟩</td>
 	</tr>
 	<tr>
 		<td>RLA🟥</td>
