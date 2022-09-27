@@ -8,8 +8,8 @@ macro_rules! incl {
 }
 
 incl!(
-	// official opcodes								 (brk)
-	adc, and, asl, bcc, bcs, beq, bit, bmi, bne, bpl,	   bvc, bvs, clc,
+	// official opcodes                              (brk)
+	adc, and, asl, bcc, bcs, beq, bit, bmi, bne, bpl,      bvc, bvs, clc,
 	cld, cli, clv, cmp, cpx, cpy, dec, dex, dey, eor, inc, inx, iny, jmp,
 	jsr, lda, ldx, ldy, lsr, nop, ora, pha, php, pla, plp, rol, ror, rti,
 	rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
