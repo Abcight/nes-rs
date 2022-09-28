@@ -15,7 +15,7 @@ incl!(
 	rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
 
 	// undocumented opcodes                (dop)
-	aac, aax, arr, asr, atx, axa, axs, dcp,      isc
+	aac, aax, arr, asr, atx, axa, axs, dcp,      isc, lar
 );
 
 pub struct OpCodeDef {
@@ -95,6 +95,7 @@ map!(
 	ASR,	0x4B, 2, 2, Immediate,	asr,
 	ATX,	0xAB, 2, 2, Immediate,	atx,
 	AXS,	0xCB, 2, 2, Immediate,	axs,
+	LAR,	0xBB, 3, 4, Absolute,	lar,
 
 	NOP1,	0xEA, 1, 2, Implied,	nop,
 	NOP2,	0x1A, 1, 2, Implied,	nop,
