@@ -9,9 +9,7 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x69;
 
-pub fn adc(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let data = cpu.read(addr);
+pub fn add_a_carry(cpu: &mut Cpu, data: u8) {
 	let sum = cpu.register_a as u16 + data as u16 + cpu.status.get_carry() as u16;
 
 	let carry = sum > 0xff;
@@ -23,6 +21,12 @@ pub fn adc(cpu: &mut Cpu, mode: &AddressingMode) {
 
 	cpu.register_a = result;
 	cpu.set_zero_neg_flags(cpu.register_a);
+}
+
+pub fn adc(cpu: &mut Cpu, mode: &AddressingMode) {
+	let addr = cpu.get_operand_address(mode);
+	let data = cpu.read(addr);
+	add_a_carry(cpu, data);
 }
 
 #[cfg(test)]

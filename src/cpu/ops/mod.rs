@@ -16,7 +16,7 @@ incl!(
 
 	// undocumented opcodes                (dop)     (kil)          (nop)
 	aac, aax, arr, asr, atx, axa, axs, dcp,      isc,      lar, lax,
-	rla
+	rla, rra
 );
 
 pub struct OpCodeDef {
@@ -322,5 +322,13 @@ map!(
 	RLA4,	0x3F, 3, 7, AbsoluteX,	rla,
 	RLA5,	0x3B, 3, 7, AbsoluteY,	rla,
 	RLA6,	0x23, 2, 8, IndirectX,	rla,
-	RLA7,	0x33, 2, 8, IndirectY,	rla
+	RLA7,	0x33, 2, 8, IndirectY,	rla,
+
+	RRA1,	0x67, 2, 5, ZeroPage,	rra,
+	RRA2,	0x77, 2, 6, ZeroPageX,	rra,
+	RRA3,	0x6F, 3, 6, Absolute,	rra,
+	RRA4,	0x7F, 3, 7, AbsoluteX,	rra,
+	RRA5,	0x7B, 3, 7, AbsoluteY,	rra,
+	RRA6,	0x63, 2, 8, IndirectX,	rra,
+	RRA7,	0x73, 2, 8, IndirectY,	rra
 );
