@@ -14,8 +14,9 @@ incl!(
 	jsr, lda, ldx, ldy, lsr, nop, ora, pha, php, pla, plp, rol, ror, rti,
 	rts, sbc, sec, sed, sei, sta, stx, sty, tax, tay, tsx, txa, txs, tya,
 
-	// undocumented opcodes                (dop)
-	aac, aax, arr, asr, atx, axa, axs, dcp,      isc, lar, lax
+	// undocumented opcodes                (dop)     (kil)          (nop)
+	aac, aax, arr, asr, atx, axa, axs, dcp,      isc,      lar, lax,
+	rla
 );
 
 pub struct OpCodeDef {
@@ -313,5 +314,13 @@ map!(
 	LAX3,	0xAF, 3, 4, Absolute,	lax,
 	LAX4,	0xBF, 3, 4, AbsoluteY,	lax,
 	LAX5,	0xA3, 2, 6, IndirectX,	lax,
-	LAX6,	0xB3, 2, 5, IndirectY,	lax
+	LAX6,	0xB3, 2, 5, IndirectY,	lax,
+
+	RLA1,	0x27, 2, 5, ZeroPage,	rla,
+	RLA2,	0x37, 2, 6, ZeroPageX,	rla,
+	RLA3,	0x2F, 3, 6, Absolute,	rla,
+	RLA4,	0x3F, 3, 7, AbsoluteX,	rla,
+	RLA5,	0x3B, 3, 7, AbsoluteY,	rla,
+	RLA6,	0x23, 2, 8, IndirectX,	rla,
+	RLA7,	0x33, 2, 8, IndirectY,	rla
 );

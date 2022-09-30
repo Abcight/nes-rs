@@ -8,6 +8,20 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x2A;
 
+pub fn rol_m_ext(cpu: &mut Cpu, mode: &AddressingMode) -> u8 {
+	let addr = cpu.get_operand_address(mode);
+	let mut data = cpu.read(addr);
+	let carry = cpu.status.get_carry();
+	cpu.status.set_carry(data >> 7 == 1);
+	data <<= 1;
+	if carry {
+		data |= 1;
+	}
+	cpu.write(addr, data);
+	cpu.set_zero_neg_flags(data);
+	data
+}
+
 pub fn rol_a(cpu: &mut Cpu, _mode: &AddressingMode) {
 	let mut data = cpu.register_a;
 	let carry = cpu.status.get_carry();
@@ -21,16 +35,7 @@ pub fn rol_a(cpu: &mut Cpu, _mode: &AddressingMode) {
 }
 
 pub fn rol_m(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let mut data = cpu.read(addr);
-	let carry = cpu.status.get_carry();
-	cpu.status.set_carry(data >> 7 == 1);
-	data <<= 1;
-	if carry {
-		data |= 1;
-	}
-	cpu.write(addr, data);
-	cpu.set_zero_neg_flags(data);
+	rol_m_ext(cpu, mode);
 }
 
 #[cfg(test)]
