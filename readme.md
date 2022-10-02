@@ -97,7 +97,7 @@ Additionally, the chip shipped with certain unofficial opcodes that were left un
 		<td>RLA🟩</td>
 		<td>RRA🟩</td>
 		<td>SBC🟩</td>
-		<td>SLO🟥</td>
+		<td>SLO🟩</td>
 		<td>SRE🟥</td>
 		<td>SXA🟥</td>
 		<td>SYA🟥</td>
