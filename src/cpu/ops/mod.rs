@@ -17,7 +17,7 @@ incl!(
 	// undocumented opcodes                
 	//       (sbc)                         (dop)     (kil)          (nop)
 	aac, aax, arr, asr, atx, axa, axs, dcp,      isc,      lar, lax,
-	rla, rra,      slo, xaa
+	rla, rra,      slo, sre, xaa
 );
 
 pub struct OpCodeDef {
@@ -340,6 +340,14 @@ map!(
 	SLO5,	0x1B, 3, 7, AbsoluteY,	slo,
 	SLO6,	0x03, 2, 8, IndirectX,	slo,
 	SLO7,	0x13, 2, 8, IndirectY,	slo,
+
+	SRE1,	0x47, 2, 5, ZeroPage,	sre,
+	SRE2,	0x57, 2, 6, ZeroPageX,	sre,
+	SRE3,	0x4F, 3, 6, Absolute,	sre,
+	SRE4,	0x5F, 3, 7, AbsoluteX,	sre,
+	SRE5,	0x5B, 3, 7, AbsoluteY,	sre,
+	SRE6,	0x43, 2, 8, IndirectX,	sre,
+	SRE7,	0x53, 2, 8, IndirectY,	sre,
 
 	XAA,	0x8B, 2, 2, Immediate,	xaa
 );
