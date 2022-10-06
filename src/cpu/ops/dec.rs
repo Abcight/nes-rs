@@ -9,10 +9,12 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xC6;
 
-pub fn dec(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let mut data = cpu.read(addr);
-	data = data.wrapping_sub(1);
-	cpu.write(addr, data);
-	cpu.set_zero_neg_flags(data);
+impl Cpu {
+	pub fn dec(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		let mut data = self.read(addr);
+		data = data.wrapping_sub(1);
+		self.write(addr, data);
+		self.set_zero_neg_flags(data);
+	}
 }

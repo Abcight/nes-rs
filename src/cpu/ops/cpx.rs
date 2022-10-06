@@ -9,12 +9,14 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xE0;
 
-pub fn cpx(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let data = cpu.read(addr);
-	cpu.status.set_carry(cpu.register_x >= data);
-	cpu.status.set_zero(cpu.register_x == data);
-	cpu.set_zero_neg_flags(cpu.register_x.wrapping_sub(data));
+impl Cpu {
+	pub fn cpx(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		let data = self.read(addr);
+		self.status.set_carry(self.register_x >= data);
+		self.status.set_zero(self.register_x == data);
+		self.set_zero_neg_flags(self.register_x.wrapping_sub(data));
+	}
 }
 
 #[cfg(test)]

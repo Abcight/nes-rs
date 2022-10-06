@@ -9,11 +9,13 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x24;
 
-pub fn bit(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let data = cpu.read(addr);
-	println!("{data}");
-	cpu.status.set_zero(cpu.register_a & data == 0);
-	cpu.status.set_negative(data & 0b1000_0000 > 0);
-	cpu.status.set_overflow(data & 0b0100_0000 > 0);
+impl Cpu {
+	pub fn bit(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		let data = self.read(addr);
+		println!("{data}");
+		self.status.set_zero(self.register_a & data == 0);
+		self.status.set_negative(data & 0b1000_0000 > 0);
+		self.status.set_overflow(data & 0b0100_0000 > 0);
+	}
 }

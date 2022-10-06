@@ -9,19 +9,22 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x4C;
 
-pub fn jmp(cpu: &mut Cpu, mode: &AddressingMode) {
-	cpu.program_counter = match *mode {
-		AddressingMode::Absolute => {
-			cpu.read_u16(cpu.program_counter)
-		},
-		_ => {
-			let addr = cpu.read_u16(cpu.program_counter);
-			if addr & 0x00FF == 0x00FF {
-				let lo = cpu.read(addr);
-				let hi = cpu.read(addr & 0xFF00);
-				(hi as u16) << 8 | (lo as u16)
-			} else {
-				cpu.read_u16(addr)
+impl Cpu {
+	// TODO: absolute jump should probably be abstracted
+	pub fn jmp(cpu: &mut Cpu, mode: &AddressingMode) {
+		cpu.program_counter = match *mode {
+			AddressingMode::Absolute => {
+				cpu.read_u16(cpu.program_counter)
+			},
+			_ => {
+				let addr = cpu.read_u16(cpu.program_counter);
+				if addr & 0x00FF == 0x00FF {
+					let lo = cpu.read(addr);
+					let hi = cpu.read(addr & 0xFF00);
+					(hi as u16) << 8 | (lo as u16)
+				} else {
+					cpu.read_u16(addr)
+				}
 			}
 		}
 	}

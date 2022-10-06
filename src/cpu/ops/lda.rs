@@ -9,12 +9,14 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xa9;
 
-pub fn lda(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let value = cpu.read(addr);
+impl Cpu {
+	pub fn lda(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		let value = self.read(addr);
 
-	cpu.register_a = value;
-	cpu.set_zero_neg_flags(cpu.register_a);
+		self.register_a = value;
+		self.set_zero_neg_flags(self.register_a);
+	}
 }
 
 #[cfg(test)]

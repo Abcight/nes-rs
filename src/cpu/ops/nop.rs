@@ -7,4 +7,6 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xEA;
 
-pub fn nop(_cpu: &mut Cpu, _mode: &AddressingMode) {}
+impl Cpu {
+	pub fn nop(&mut self, _mode: &AddressingMode) {}
+}

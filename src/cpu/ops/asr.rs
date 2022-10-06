@@ -4,17 +4,18 @@
 use super::AddressingMode;
 use super::Cpu;
 use super::Memory;
-use super::lsr;
 
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x4B;
 
-pub fn asr(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let data = cpu.read(addr);
-	cpu.register_a &= data;
-	cpu.set_zero_neg_flags(cpu.register_a);
-	lsr::lsr_a(cpu, mode);
+impl Cpu {
+	pub fn asr(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		let data = self.read(addr);
+		self.register_a &= data;
+		self.set_zero_neg_flags(self.register_a);
+		self.lsr_a(mode);
+	}
 }
 
 #[cfg(test)]

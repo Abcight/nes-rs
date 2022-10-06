@@ -9,24 +9,26 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x69;
 
-pub fn add_a_carry(cpu: &mut Cpu, data: u8) {
-	let sum = cpu.register_a as u16 + data as u16 + cpu.status.get_carry() as u16;
+impl Cpu {
+	pub fn add_a_carry(&mut self, data: u8) {
+		let sum = self.register_a as u16 + data as u16 + self.status.get_carry() as u16;
 
-	let carry = sum > 0xff;
-	cpu.status.set_carry(carry);
+		let carry = sum > 0xff;
+		self.status.set_carry(carry);
 
-	let result = sum as u8;
-	let overflow = (data ^ result) & (result ^ cpu.register_a) & 0x80 != 0;
-	cpu.status.set_overflow(overflow);
+		let result = sum as u8;
+		let overflow = (data ^ result) & (result ^ self.register_a) & 0x80 != 0;
+		self.status.set_overflow(overflow);
 
-	cpu.register_a = result;
-	cpu.set_zero_neg_flags(cpu.register_a);
-}
+		self.register_a = result;
+		self.set_zero_neg_flags(self.register_a);
+	}
 
-pub fn adc(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let data = cpu.read(addr);
-	add_a_carry(cpu, data);
+	pub fn adc(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		let data = self.read(addr);
+		self.add_a_carry(data);
+	}
 }
 
 #[cfg(test)]

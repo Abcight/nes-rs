@@ -9,21 +9,23 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xE9;
 
-pub fn sbc(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let data = cpu.read(addr);
-	let data = ((data as i8).wrapping_neg().wrapping_sub(1)) as u8;
-	let sum = cpu.register_a as u16 + data as u16 + cpu.status.get_carry() as u16;
+impl Cpu {
+	pub fn sbc(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		let data = self.read(addr);
+		let data = ((data as i8).wrapping_neg().wrapping_sub(1)) as u8;
+		let sum = self.register_a as u16 + data as u16 + self.status.get_carry() as u16;
 
-	let carry = sum > 0xff;
-	cpu.status.set_carry(carry);
+		let carry = sum > 0xff;
+		self.status.set_carry(carry);
 
-	let result = sum as u8;
-	let overflow = (data ^ result) & (result ^ cpu.register_a) & 0x80 != 0;
-	cpu.status.set_overflow(overflow);
+		let result = sum as u8;
+		let overflow = (data ^ result) & (result ^ self.register_a) & 0x80 != 0;
+		self.status.set_overflow(overflow);
 
-	cpu.register_a = result;
-	cpu.set_zero_neg_flags(cpu.register_a);
+		self.register_a = result;
+		self.set_zero_neg_flags(self.register_a);
+	}
 }
 
 #[cfg(test)]

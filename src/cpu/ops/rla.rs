@@ -3,13 +3,14 @@
 
 use super::AddressingMode;
 use super::Cpu;
-use super::rol_m_ext;
 
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x27;
 
-pub fn rla(cpu: &mut Cpu, mode: &AddressingMode) {
-	let data = rol_m_ext(cpu, mode);
-	cpu.register_a &= data;
-	cpu.set_zero_neg_flags(cpu.register_a);
+impl Cpu {
+	pub fn rla(&mut self, mode: &AddressingMode) {
+		let data = self.rol_m_ext(mode);
+		self.register_a &= data;
+		self.set_zero_neg_flags(self.register_a);
+	}
 }

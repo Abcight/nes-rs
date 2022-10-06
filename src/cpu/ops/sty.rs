@@ -9,9 +9,11 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x84;
 
-pub fn sty(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	cpu.write(addr, cpu.register_y);
+impl Cpu {
+	pub fn sty(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		self.write(addr, self.register_y);
+	}
 }
 
 #[cfg(test)]

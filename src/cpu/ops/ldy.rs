@@ -9,12 +9,14 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xA0;
 
-pub fn ldy(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let value = cpu.read(addr);
+impl Cpu {
+	pub fn ldy(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		let value = self.read(addr);
 
-	cpu.register_y = value;
-	cpu.set_zero_neg_flags(cpu.register_y);
+		self.register_y = value;
+		self.set_zero_neg_flags(self.register_y);
+	}
 }
 
 #[cfg(test)]

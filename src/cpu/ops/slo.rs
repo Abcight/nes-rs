@@ -3,15 +3,16 @@
 
 use super::AddressingMode;
 use super::Cpu;
-use super::asl_ext;
 
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x07;
 
-pub fn slo(cpu: &mut Cpu, _mode: &AddressingMode) {
-	let data = asl_ext(cpu);
-	cpu.register_a |= data;
-	cpu.set_zero_neg_flags(cpu.register_a);
+impl Cpu {
+	pub fn slo(&mut self, _mode: &AddressingMode) {
+		let data = self.asl_ext();
+		self.register_a |= data;
+		self.set_zero_neg_flags(self.register_a);
+	}
 }
 
 #[cfg(test)]

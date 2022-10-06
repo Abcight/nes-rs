@@ -8,17 +8,19 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x9F;
 
-pub fn axa_in(cpu: &mut Cpu, _mode: &AddressingMode) {
-	let pos: u8 = cpu.read(cpu.program_counter);
-	let addr = cpu.read_u16(pos as u16) + cpu.register_y as u16;
-	let data = cpu.register_a & cpu.register_x & 0b0000_0111;
-	cpu.write(addr, data);
-}
+impl Cpu {
+	pub fn axa_in(&mut self, _mode: &AddressingMode) {
+		let pos: u8 = self.read(self.program_counter);
+		let addr = self.read_u16(pos as u16) + self.register_y as u16;
+		let data = self.register_a & self.register_x & 0b0000_0111;
+		self.write(addr, data);
+	}
 
-pub fn axa_ab(cpu: &mut Cpu, _mode: &AddressingMode) {
-	let addr = cpu.read_u16(cpu.program_counter) + cpu.register_y as u16;
-	let data = cpu.register_a & cpu.register_x & 0b0000_0111;
-	cpu.write(addr, data);
+	pub fn axa_ab(&mut self, _mode: &AddressingMode) {
+		let addr = self.read_u16(self.program_counter) + self.register_y as u16;
+		let data = self.register_a & self.register_x & 0b0000_0111;
+		self.write(addr, data);
+	}
 }
 
 #[cfg(test)]

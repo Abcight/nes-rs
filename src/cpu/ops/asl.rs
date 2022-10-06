@@ -8,17 +8,19 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x0A;
 
-pub fn asl_ext(cpu: &mut Cpu) -> u8 {
-	let mut data = cpu.register_a;
-	cpu.status.set_carry(data >> 7 == 1);
-	data <<= 1;
-	cpu.register_a = data;
-	cpu.set_zero_neg_flags(cpu.register_a);
-	data
-}
+impl Cpu {
+	pub fn asl_ext(&mut self) -> u8 {
+		let mut data = self.register_a;
+		self.status.set_carry(data >> 7 == 1);
+		data <<= 1;
+		self.register_a = data;
+		self.set_zero_neg_flags(self.register_a);
+		data
+	}
 
-pub fn asl(cpu: &mut Cpu, _mode: &AddressingMode) {
-	asl_ext(cpu);
+	pub fn asl(&mut self, _mode: &AddressingMode) {
+		self.asl_ext();
+	}
 }
 
 #[cfg(test)]
