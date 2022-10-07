@@ -7,8 +7,10 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xD0;
 
-pub fn bne(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.branch_if(!cpu.status.get_zero());
+impl Cpu {
+	pub fn bne(&mut self, _mode: &AddressingMode) {
+		self.branch_if(!self.status.get_zero());
+	}
 }
 
 #[cfg(test)]

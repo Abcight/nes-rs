@@ -8,11 +8,13 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xBB;
 
-pub fn lar(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let data = cpu.read(addr) & cpu.stack_pointer;
-	cpu.register_a = data;
-	cpu.register_x = data;
-	cpu.stack_pointer = data;
-	cpu.set_zero_neg_flags(data);
+impl Cpu {
+	pub fn lar(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		let data = self.read(addr) & self.stack_pointer;
+		self.register_a = data;
+		self.register_x = data;
+		self.stack_pointer = data;
+		self.set_zero_neg_flags(data);
+	}
 }

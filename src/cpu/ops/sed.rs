@@ -8,8 +8,10 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xF8;
 
-pub fn sed(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.status.set_decimal(true);
+impl Cpu {
+	pub fn sed(&mut self, _mode: &AddressingMode) {
+		self.status.set_decimal(true);
+	}
 }
 
 #[cfg(test)]

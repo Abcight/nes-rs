@@ -7,8 +7,10 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x60;
 
-pub fn rts(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.program_counter = cpu.pop_u16() + 1;
+impl Cpu {
+	pub fn rts(&mut self, _mode: &AddressingMode) {
+		self.program_counter = self.pop_u16() + 1;
+	}
 }
 
 #[cfg(test)]

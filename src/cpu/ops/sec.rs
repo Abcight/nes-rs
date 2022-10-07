@@ -8,8 +8,10 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x38;
 
-pub fn sec(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.status.set_carry(true);
+impl Cpu {
+	pub fn sec(&mut self, _mode: &AddressingMode) {
+		self.status.set_carry(true);
+	}
 }
 
 #[cfg(test)]

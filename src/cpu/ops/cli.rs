@@ -8,8 +8,10 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x58;
 
-pub fn cli(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.status.set_interrupt(false);
+impl Cpu {
+	pub fn cli(&mut self, _mode: &AddressingMode) {
+		self.status.set_interrupt(false);
+	}
 }
 
 #[cfg(test)]

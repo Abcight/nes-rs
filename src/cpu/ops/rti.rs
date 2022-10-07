@@ -7,9 +7,11 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x40;
 
-pub fn rti(cpu: &mut Cpu, _mode: &AddressingMode) {
-	*cpu.status = cpu.pop();
-	cpu.status.set_break_min(false);
-	cpu.status.set_break_max(true);
-	cpu.program_counter = cpu.pop_u16();
+impl Cpu {
+	pub fn rti(&mut self, _mode: &AddressingMode) {
+		*self.status = self.pop();
+		self.status.set_break_min(false);
+		self.status.set_break_max(true);
+		self.program_counter = self.pop_u16();
+	}
 }

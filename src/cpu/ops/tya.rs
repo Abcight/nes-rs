@@ -8,9 +8,11 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x98;
 
-pub fn tya(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.register_a = cpu.register_y;
-	cpu.set_zero_neg_flags(cpu.register_a);
+impl Cpu {
+	pub fn tya(&mut self, _mode: &AddressingMode) {
+		self.register_a = self.register_y;
+		self.set_zero_neg_flags(self.register_a);
+	}
 }
 
 #[cfg(test)]

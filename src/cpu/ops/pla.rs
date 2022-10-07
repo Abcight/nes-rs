@@ -7,7 +7,9 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x68;
 
-pub fn pla(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.register_a = cpu.pop();
-	cpu.set_zero_neg_flags(cpu.register_a);
+impl Cpu {
+	pub fn pla(&mut self, _mode: &AddressingMode) {
+		self.register_a = self.pop();
+		self.set_zero_neg_flags(self.register_a);
+	}
 }

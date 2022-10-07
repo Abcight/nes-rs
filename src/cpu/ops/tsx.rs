@@ -8,7 +8,9 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xBA;
 
-pub fn tsx(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.register_x = cpu.stack_pointer;
-	cpu.set_zero_neg_flags(cpu.register_x);
+impl Cpu {
+	pub fn tsx(&mut self, _mode: &AddressingMode) {
+		self.register_x = self.stack_pointer;
+		self.set_zero_neg_flags(self.register_x);
+	}
 }

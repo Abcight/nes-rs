@@ -7,8 +7,10 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x70;
 
-pub fn bvs(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.branch_if(cpu.status.get_overflow());
+impl Cpu {
+	pub fn bvs(&mut self, _mode: &AddressingMode) {
+		self.branch_if(self.status.get_overflow());
+	}
 }
 
 #[cfg(test)]

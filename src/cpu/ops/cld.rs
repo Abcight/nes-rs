@@ -7,8 +7,10 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xD8;
 
-pub fn cld(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.status.set_decimal(false);
+impl Cpu {
+	pub fn cld(&mut self, _mode: &AddressingMode) {
+		self.status.set_decimal(false);
+	}
 }
 
 #[cfg(test)]

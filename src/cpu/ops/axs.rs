@@ -8,18 +8,20 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xCB;
 
-pub fn axs(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let data = cpu.read(addr);
-	let xa = cpu.register_x & cpu.register_a;
-	let result = xa.wrapping_sub(data);
+impl Cpu {
+	pub fn axs(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		let data = self.read(addr);
+		let xa = self.register_x & self.register_a;
+		let result = xa.wrapping_sub(data);
 
-	if data <= xa {
-		cpu.status.set_carry(true);
+		if data <= xa {
+			self.status.set_carry(true);
+		}
+
+		self.register_x = result;
+		self.set_zero_neg_flags(self.register_x);
 	}
-
-	cpu.register_x = result;
-	cpu.set_zero_neg_flags(cpu.register_x);
 }
 
 #[cfg(test)]

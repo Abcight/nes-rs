@@ -7,8 +7,10 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x18;
 
-pub fn clc(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.status.set_carry(false);
+impl Cpu {
+	pub fn clc(&mut self, _mode: &AddressingMode) {
+		self.status.set_carry(false);
+	}
 }
 
 #[cfg(test)]

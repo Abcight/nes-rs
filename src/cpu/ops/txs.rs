@@ -8,6 +8,8 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x9A;
 
-pub fn txs(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.stack_pointer = cpu.register_x;
+impl Cpu {
+	pub fn txs(&mut self, _mode: &AddressingMode) {
+		self.stack_pointer = self.register_x;
+	}
 }

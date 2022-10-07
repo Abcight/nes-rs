@@ -7,10 +7,12 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x08;
 
-pub fn php(cpu: &mut Cpu, _mode: &AddressingMode) {
-	let mut flags = *cpu.status;
-	flags |= 0b0011_0000;
-	cpu.push(flags);
+impl Cpu {
+	pub fn php(&mut self, _mode: &AddressingMode) {
+		let mut flags = *self.status;
+		flags |= 0b0011_0000;
+		self.push(flags);
+	}
 }
 
 #[cfg(test)]

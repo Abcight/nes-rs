@@ -8,9 +8,11 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xCA;
 
-pub fn dex(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.register_x = cpu.register_x.overflowing_sub(1).0;
-	cpu.set_zero_neg_flags(cpu.register_x);
+impl Cpu {
+	pub fn dex(&mut self, _mode: &AddressingMode) {
+		self.register_x = self.register_x.overflowing_sub(1).0;
+		self.set_zero_neg_flags(self.register_x);
+	}
 }
 
 #[cfg(test)]

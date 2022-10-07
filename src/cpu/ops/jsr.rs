@@ -8,7 +8,9 @@ use super::Memory;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x20;
 
-pub fn jsr(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.push_u16(cpu.program_counter + 2 - 1);
-	cpu.program_counter = cpu.read_u16(cpu.program_counter);
+impl Cpu {
+	pub fn jsr(&mut self, _mode: &AddressingMode) {
+		self.push_u16(self.program_counter + 2 - 1);
+		self.program_counter = self.read_u16(self.program_counter);
+	}
 }

@@ -8,8 +8,10 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xB8;
 
-pub fn clv(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.status.set_overflow(false);
+impl Cpu {
+	pub fn clv(&mut self, _mode: &AddressingMode) {
+		self.status.set_overflow(false);
+	}
 }
 
 #[cfg(test)]

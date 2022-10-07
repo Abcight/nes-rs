@@ -8,9 +8,11 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xAA;
 
-pub fn tax(cpu: &mut Cpu, _mode: &AddressingMode) {
-	cpu.register_x = cpu.register_a;
-	cpu.set_zero_neg_flags(cpu.register_x);
+impl Cpu {
+	pub fn tax(&mut self, _mode: &AddressingMode) {
+		self.register_x = self.register_a;
+		self.set_zero_neg_flags(self.register_x);
+	}
 }
 
 #[cfg(test)]

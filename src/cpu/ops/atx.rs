@@ -4,19 +4,20 @@
 use super::AddressingMode;
 use super::Cpu;
 use super::Memory;
-use super::tax;
 
 #[allow(dead_code)]
 pub const IMOP: u8 = 0xAB;
 
-pub fn atx(cpu: &mut Cpu, mode: &AddressingMode) {
-	let addr = cpu.get_operand_address(mode);
-	let data = cpu.read(addr);
+impl Cpu {
+	pub fn atx(&mut self, mode: &AddressingMode) {
+		let addr = self.get_operand_address(mode);
+		let data = self.read(addr);
 
-	cpu.register_a &= data;
-	cpu.set_zero_neg_flags(cpu.register_a);
+		self.register_a &= data;
+		self.set_zero_neg_flags(self.register_a);
 
-	tax::tax(cpu, mode);
+		self.tax(mode);
+	}
 }
 
 #[cfg(test)]

@@ -7,7 +7,9 @@ use super::Cpu;
 #[allow(dead_code)]
 pub const IMOP: u8 = 0x28;
 
-pub fn plp(cpu: &mut Cpu, _mode: &AddressingMode) {
-	*cpu.status = cpu.pop();
-	cpu.status.set_break(true);
+impl Cpu {
+	pub fn plp(&mut self, _mode: &AddressingMode) {
+		*self.status = self.pop();
+		self.status.set_break(true);
+	}
 }
