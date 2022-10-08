@@ -6,8 +6,10 @@ A simple Nintendo Entertaining System emulator written in pure rust.
 I want to gain insight into the inner workings of the NES, and this project is a part of my research. In addition to that, I seek to learn more about the Rust programming language, and this project is a golden opportunity to achieve that goal.
 
 ## Progress
-So far I have only began working on emulating the [Obelisk 6502 chip instructions](https://www.nesdev.org/obelisk-6502-guide/reference.html).
-Here you can see how many have already been implemented:
+The project is undergoing a very minor refactor at the moment.
+I have recognised things that could've been done in a much better way, and I think it's appropriate to address these issues, as this is first and foremost a learning exercise.
+
+So far I have only began working on emulating the [Obelisk 6502 chip instructions](https://www.nesdev.org/obelisk-6502-guide/reference.html). Here you can see how many have already been implemented:
 <table>
 	<tr>
 		<td>ADC🟩</td>
