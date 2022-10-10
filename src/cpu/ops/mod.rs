@@ -61,7 +61,6 @@ macro_rules! map {
 }
 
 map!(
-	// TODO: Move the remaining singular ops into impl blocks
 	TAX,	0xAA, 1, 2, Implied,	Cpu::tax,
 	TAY,	0xA8, 1, 2, Implied,	Cpu::tay,
 	INX,	0xE8, 1, 2, Implied,	Cpu::inx,
@@ -237,7 +236,7 @@ map!(
 	CPY2,	0xC4, 2, 3, ZeroPage,	Cpu::cpy,
 	CPY3,	0xCC, 3, 4, Absolute,	Cpu::cpy,
 
-	JMP1,	0x4C, 3, 3, Absolute,	Cpu::jmp,
+	JMP1,	0x4C, 3, 3, Absolute,	Cpu::jmp_absolute,
 	JMP2,	0x6C, 3, 5, Immediate,	Cpu::jmp,
 
 	DEC1,	0xC6, 2, 5, ZeroPage,	Cpu::dec,
