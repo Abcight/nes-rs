@@ -1,4 +1,4 @@
-use super::memory::*;
+use super::Memory;
 use super::AddressingMode;
 use super::Cpu;
 

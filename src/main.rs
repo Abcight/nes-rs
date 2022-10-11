@@ -1,6 +1,8 @@
 use cpu::Cpu;
 
 mod cpu;
+mod bus;
+mod memory;
 
 fn main() {
 	use cpu::ops::*;

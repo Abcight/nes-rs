@@ -1,7 +1,6 @@
 pub mod ops;
 
-mod memory;
-pub use memory::*;
+pub use super::memory::*;
 mod status;
 use status::*;
 
