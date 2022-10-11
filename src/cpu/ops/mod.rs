@@ -17,7 +17,7 @@ incl!(
 	// undocumented opcodes                
 	//       (sbc)                         (dop)     (kil)          (nop)
 	aac, aax, arr, asr, atx, axa, axs, dcp,      isc,      lar, lax,
-	rla, rra,      slo, sre, sxa, sya, xaa
+	rla, rra,      slo, sre, sxa, sya, xaa, xas
 );
 
 pub struct OpCodeDef {
@@ -101,6 +101,7 @@ map!(
 	SXA,	0x9E, 3, 5, AbsoluteY,	Cpu::sxa,
 	SYA,	0x9C, 3, 5, AbsoluteX,	Cpu::sya,
 	XAA,	0x8B, 2, 2, Immediate,	Cpu::xaa,
+	XAS,	0x9B, 3, 5, AbsoluteY,	Cpu::xas,
 
 	NOP1,	0xEA, 1, 2, Implied,	Cpu::nop,
 	NOP2,	0x1A, 1, 2, Implied,	Cpu::nop,
