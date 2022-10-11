@@ -102,7 +102,7 @@ Additionally, the chip shipped with certain unofficial opcodes that were left un
 		<td>SLO🟩</td>
 		<td>SRE🟩</td>
 		<td>SXA🟩</td>
-		<td>SYA🟥</td>
+		<td>SYA🟩</td>
 		<td>TOP🟩</td>
 		<td>XAA🟩</td>
 		<td>XAS🟥</td>
