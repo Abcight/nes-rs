@@ -23,6 +23,6 @@ mod test {
 	fn test_pha() {
 		let mut cpu = Cpu::new();
 		cpu.interpret(vec![0xa9, 16, IMOP, 0x00]);
-		assert!(cpu.memory.contains(&16));
+		assert!(cpu.bus.vram_contains(16));
 	}
 }

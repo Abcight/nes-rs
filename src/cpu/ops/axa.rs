@@ -31,13 +31,13 @@ mod test {
 	fn test_axa_indirect() {
 		let mut cpu = Cpu::new();
 		cpu.interpret(vec![0xa9, 0b1100_0110, 0xa2, 0b0110_0011, 0x93, 0x00]);
-		assert!(cpu.memory.contains(&0b0000_0010));
+		assert!(cpu.bus.vram_contains(0b0000_0010));
 	}
 
 	#[test]
 	fn test_axa_absolute() {
 		let mut cpu = Cpu::new();
 		cpu.interpret(vec![0xa9, 0b1100_0110, 0xa2, 0b0110_0011, 0x9f, 0x00]);
-		assert!(cpu.memory.contains(&0b0000_0010));
+		assert!(cpu.bus.vram_contains(0b0000_0010));
 	}
 }

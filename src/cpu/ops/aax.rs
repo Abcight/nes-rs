@@ -23,6 +23,6 @@ mod test {
 	fn test_aax() {
 		let mut cpu = Cpu::new();
 		cpu.interpret(vec![0xa9, 0b1000_0001, 0xa2, 0b1000_0100, IMOP, 0x00]);
-		assert!(cpu.memory.contains(&0b1000_0000))
+		assert!(cpu.bus.vram_contains(0b1000_0000))
 	}
 }

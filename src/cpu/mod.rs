@@ -1,8 +1,10 @@
 pub mod ops;
 
-pub use super::memory::*;
 mod status;
 use status::*;
+
+pub use super::memory::Memory;
+pub use super::bus::Bus;
 
 pub const STACK: u16 = 0x0100;
 pub const DEFAULT_STACK: u8 = 0xfd;
@@ -27,7 +29,7 @@ pub struct Cpu {
 	pub status: CpuStatus,
 	pub program_counter: u16,
 	pub stack_pointer: u8,
-	memory: [u8; 0xFFFF],
+	pub bus: Bus,
 }
 
 impl Cpu {
@@ -39,7 +41,7 @@ impl Cpu {
 			status: CpuStatus(0),
 			program_counter: 0,
 			stack_pointer: DEFAULT_STACK,
-			memory: [0; 0xFFFF],
+			bus: Bus::new()
 		}
 	}
 
@@ -61,8 +63,10 @@ impl Cpu {
 	}
 
 	pub fn load(&mut self, program: Vec<u8>) {
-		self.memory[0x8000..(0x8000 + program.len())].copy_from_slice(&program[..]);
-		self.write_u16(0xFFFC, 0x8000);
+		for i in 0..(program.len() as u16) {
+			self.write(0x0600 + i, program[i as usize]);
+		}
+		self.write_u16(0xFFFC, 0x0600);
 	}
 
 	pub fn reset(&mut self) {
@@ -71,7 +75,7 @@ impl Cpu {
 		self.register_y = 0;
 		self.status = CpuStatus(0b100100);
 		self.stack_pointer = DEFAULT_STACK;
-		self.program_counter = self.read_u16(0xFFFC);
+		self.program_counter = 0x0600;
 	}
 
 	pub fn branch_if(&mut self, condition: bool) {
@@ -156,23 +160,17 @@ impl Cpu {
 
 impl Memory for Cpu {
 	fn read(&self, addr: u16) -> u8 {
-		self.memory[addr as usize]
+		self.bus.read(addr)
 	}
 
 	fn write(&mut self, addr: u16, data: u8) {
-		self.memory[addr as usize] = data;
+		self.bus.write(addr, data);
 	}
-
 	fn read_u16(&self, pos: u16) -> u16 {
-		let lo = self.read(pos) as u16;
-		let hi = self.read(pos + 1) as u16;
-		(hi << 8) | (lo as u16)
+		self.bus.read_u16(pos)
 	}
 
 	fn write_u16(&mut self, pos: u16, data: u16) {
-		let hi = (data >> 8) as u8;
-		let lo = (data & 0xff) as u8;
-		self.write(pos, lo);
-		self.write(pos + 1, hi);
+		self.bus.write_u16(pos, data);
 	}
 }

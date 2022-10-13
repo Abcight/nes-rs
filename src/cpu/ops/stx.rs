@@ -24,6 +24,6 @@ mod test {
 	fn test_stx_store_data() {
 		let mut cpu = Cpu::new();
 		cpu.interpret(vec![0xa2, 0x43, IMOP, 0x00]);
-		assert!(cpu.memory.contains(&0x43));
+		assert!(cpu.bus.vram_contains(0x43));
 	}
 }

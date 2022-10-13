@@ -23,6 +23,6 @@ mod test {
 	fn test_php() {
 		let mut cpu = Cpu::new();
 		cpu.interpret(vec![0xa9, 16, IMOP, 0x00]);
-		assert!(cpu.memory.contains(&(*cpu.status | 0b0011_0000)))
+		assert!(cpu.bus.vram_contains(*cpu.status | 0b0011_0000))
 	}
 }
