@@ -109,7 +109,24 @@ Additionally, the chip shipped with certain unofficial opcodes that were left un
 	</tr>
 </table>
 
-🚧 - implemented, NesTest untested
+<table>
+	<tr>
+		<th>Symbol</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td>🚧</td>
+		<td>Implemented, not ran against NesTest</td>
+	</tr>
+	<tr>
+		<td>✔️</td>
+		<td>Implemented, passed NesTest</td>
+	</tr>
+	<tr>
+		<td>❌</td>
+		<td>Implemented, failed NesTest</td>
+	</tr>
+</table>
 
 ## Goals
 My grandest goal is that of building a greater understanding of NES and its inner workings, as well as deepening my knowledge of Rust.
