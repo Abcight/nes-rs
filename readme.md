@@ -1,15 +1,13 @@
-# NES-RS
-A simple Nintendo Entertaining System emulator written in pure rust.
-**This project is a work-in-progess!!**
+<h1 align="center">NES-RS</h1>
+<p align="center">A Nintendo Entertainment System emulator written in pure Rust.<br>
+<i><b>🚧 Work in progress! 🚧</i></b>
+</p>
 
-## Why?
-I want to gain insight into the inner workings of the NES, and this project is a part of my research. In addition to that, I seek to learn more about the Rust programming language, and this project is a golden opportunity to achieve that goal.
+## Motivation 🙌
+I want to gain insight into the inner workings of the NES, and this project is a part of my research. Additionally, I want to build a better understanding of Rust.
 
-## Progress
-The project is undergoing a very minor refactor at the moment.
-I have recognised things that could've been done in a much better way, and I think it's appropriate to address these issues, as this is first and foremost a learning exercise.
-
-So far I have only began working on emulating the [Obelisk 6502 chip instructions](https://www.nesdev.org/obelisk-6502-guide/reference.html). Here you can see how many have already been implemented:
+## Progress 🚀
+This is a side project, so everything is moving at a snail's pace. So far I have only began working on emulating the [Obelisk 6502 chip instructions](https://www.nesdev.org/obelisk-6502-guide/reference.html). Here you can see how many have already been implemented:
 <table>
 	<tr>
 		<td>ADC🚧</td>
@@ -77,7 +75,7 @@ So far I have only began working on emulating the [Obelisk 6502 chip instruction
 	</tr>
 </table>
 
-Additionally, the chip shipped with certain unofficial opcodes that were left unused by design. However, some games still use these undocumented operations, so I am going to implement them for the sake of completeness. You can see the progress on that here:
+Additionally, the chip shipped with certain unofficial opcodes that were left unused by design. Some games still use these undocumented operations, so I am going to implement them for the sake of completeness. You can see the progress on that here:
 <table>
 	<tr>
 		<td>AAC🚧</td>
@@ -128,11 +126,11 @@ Additionally, the chip shipped with certain unofficial opcodes that were left un
 	</tr>
 </table>
 
-## Goals
+## Goals 🎯
 My grandest goal is that of building a greater understanding of NES and its inner workings, as well as deepening my knowledge of Rust.
-That wouldn't be possible without having a set path in mind, so I've decided that by the end of this learning experience I want to have an emulator capable of running the "Super Mario Bros".
+That wouldn't be possible without having a set path in mind, so I've decided that by the end of this learning experience I want to have an emulator capable of running "Super Mario Bros".
 
-## Sources
+## Sources 📚
 - [Call-A.P.P.L.E Obelisk 6502](https://www.callapple.org/obelisk-6502-registers/)
 - [Obelisk.me guide (archived)](https://web.archive.org/web/20210909190432/http://www.obelisk.me.uk/6502/)
 - [The Rust Programming Language](https://doc.rust-lang.org/book/)
