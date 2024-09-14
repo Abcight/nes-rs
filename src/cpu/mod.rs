@@ -1,10 +1,11 @@
+mod status;
 pub mod ops;
 
-mod status;
 use status::*;
 
 pub use super::memory::Memory;
 pub use super::bus::Bus;
+pub use ops::*;
 
 pub const STACK: u16 = 0x0100;
 pub const DEFAULT_STACK: u8 = 0xfd;
@@ -173,83 +174,6 @@ impl Memory for Cpu {
 	fn write_u16(&mut self, pos: u16, data: u16) {
 		self.bus.write_u16(pos, data);
 	}
-}
-
-// OPCODES
-pub enum OpCode {
-	AAC = 0x0B,
-	AAX = 0x87,
-	ADC = 0x69,
-	AND = 0x29,
-	ARR = 0x6B,
-	ASL = 0x0A,
-	ASR = 0x4B,
-	TXA = 0x8A,
-	TXS = 0x9A,
-	TYA = 0x98,
-	XAS = 0x00, // TODO: Fix this
-	XAA = 0x8B,
-	TSX = 0xBA,
-	TAY = 0xA8,
-	TAX = 0xAA,
-	SYA = 0x9C,
-	SXA = 0x9E,
-	STY = 0x84,
-	STX = 0x86,
-	STA = 0x85,
-	SRE = 0x47,
-	SLO = 0x07,
-	SEI = 0x78,
-	SED = 0xF8,
-	SEC = 0x38,
-	SBC = 0xE9,
-	RTS = 0x60,
-	RTI = 0x40,
-	RRA = 0x63,
-	ROR = 0x6A,
-	ROL = 0x2A,
-	RLA = 0x27,
-	PLP = 0x28,
-	PLA = 0x68,
-	PHP = 0x08,
-	PHA = 0x48,
-	ORA = 0x09,
-	NOP = 0xEA,
-	LSR = 0x4A,
-	LDY = 0xA0,
-	LDX = 0xA2,
-	LDA = 0xA9,
-	LAX = 0xA7,
-	LAR = 0xBB,
-	JSR = 0x20,
-	JMP = 0x4C,
-	INY = 0xC8,
-	INX = 0xE8,
-	INC = 0xE6,
-	EOR = 0x49,
-	DEY = 0x88,
-	DEX = 0xCA,
-	DEC = 0xC6,
-	DCP = 0xC3,
-	CPY = 0xC0,
-	CPX = 0xE0,
-	CMP = 0xC9,
-	CLV = 0xB8,
-	CLI = 0x58,
-	CLD = 0xD8,
-	CLC = 0x18,
-	BVS = 0x70,
-	BVC = 0x50,
-	BPL = 0x10,
-	BNE = 0xD0,
-	BMI = 0x30,
-	BIT = 0x24,
-	BEQ = 0xF0,
-	BCS = 0xB0,
-	BCC = 0x90,
-	AXS = 0xCB,
-	AXA = 0x9F,
-	ATX = 0xAB,
 }
 
 impl Cpu {
@@ -1029,12 +953,11 @@ impl Cpu {
 #[cfg(test)]
 mod test {
 	use super::*;
-	use OpCode::*;
 
 	#[test]
 	fn test_aac() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9,0b1000_0001,AAC,0b1000_0100,0x00]);
+		cpu.interpret(vec![0xa9,0b1000_0001,AAC1.code,0b1000_0100,0x00]);
 		assert_eq!(cpu.register_a, 0b1000_0000);
 		assert!(cpu.status.get_negative())
 	}
@@ -1042,21 +965,21 @@ mod test {
 	#[test]
 	fn test_aax() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b1000_0001, 0xa2, 0b1000_0100, AAX, 0x00]);
+		cpu.interpret(vec![0xa9, 0b1000_0001, 0xa2, 0b1000_0100, AAX1.code, 0x00]);
 		assert!(cpu.bus.vram_contains(0b1000_0000))
 	}
 
 	#[test]
 	fn test_adc_no_carry() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 1, ADC, 3, 0x00]);
+		cpu.interpret(vec![0xa9, 1, ADC1.code, 3, 0x00]);
 		assert_eq!(cpu.register_a, 4);
 	}
 
 	#[test]
 	fn test_adc_carry() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0xff, ADC, 3, 0x00]);
+		cpu.interpret(vec![0xa9, 0xff, ADC1.code, 3, 0x00]);
 		assert_eq!(cpu.register_a, 2);
 		assert!(cpu.status.get_carry());
 	}
@@ -1064,21 +987,21 @@ mod test {
 	#[test]
 	fn test_and() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0x01, AND, 0x03, 0x00]);
+		cpu.interpret(vec![0xa9, 0x01, AND1.code, 0x03, 0x00]);
 		assert_eq!(cpu.register_a, 0x01);
 	}
 
 	#[test]
 	fn test_asl() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 2, ASL, 0x00]);
+		cpu.interpret(vec![0xa9, 2, ASL1.code, 0x00]);
 		assert_eq!(cpu.register_a, 4)
 	}
 
 	#[test]
 	fn test_asl_overflow() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xA9, 0b1000_0001, ASL, 0x00]);
+		cpu.interpret(vec![0xA9, 0b1000_0001, ASL1.code, 0x00]);
 		assert_eq!(cpu.register_a, 2);
 		assert_eq!(*cpu.status & 0b0000_0001, 1);
 	}
@@ -1086,84 +1009,84 @@ mod test {
 	#[test]
 	fn test_asr() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b1000_0011, ASR, 0b1000_0001, 0x00]);
+		cpu.interpret(vec![0xa9, 0b1000_0011, ASR.code, 0b1000_0001, 0x00]);
 		assert_eq!(cpu.register_a, 0b0100_0000)
 	}
 
 	#[test]
 	fn test_txa_move_x_to_a() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa2, 69, TXA, 0x00]);
+		cpu.interpret(vec![0xa2, 69, TXA.code, 0x00]);
 		assert_eq!(cpu.register_a, 69)
 	}
 
 	#[test]
 	fn test_tya_move_y_to_a() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa0, 69, TYA, 0x00]);
+		cpu.interpret(vec![0xa0, 69, TYA.code, 0x00]);
 		assert_eq!(cpu.register_a, 69)
 	}
 
 	#[test]
 	fn test_tay_move_a_to_y() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xA9, 69, TAY, 0x00]);
+		cpu.interpret(vec![0xA9, 69, TAY.code, 0x00]);
 		assert_eq!(cpu.register_y, 69)
 	}
 
 	#[test]
 	fn test_tax_move_a_to_x() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 69, TAX, 0x00]);
+		cpu.interpret(vec![0xa9, 69, TAX.code, 0x00]);
 		assert_eq!(cpu.register_x, 69)
 	}
 
 	#[test]
 	fn test_sty_store_data() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa0, 0x43, STY, 0x00]);
+		cpu.interpret(vec![0xa0, 0x43, STY1.code, 0x00]);
 		assert!(cpu.bus.vram_contains(0x43));
 	}
 
 	#[test]
 	fn test_stx_store_data() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa2, 0x43, STX, 0x00]);
+		cpu.interpret(vec![0xa2, 0x43, STX1.code, 0x00]);
 		assert!(cpu.bus.vram_contains(0x43));
 	}
 
 	#[test]
 	fn test_sta_store_data() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0x43, STA, 0x00]);
+		cpu.interpret(vec![0xa9, 0x43, STA1.code, 0x00]);
 		assert!(cpu.bus.vram_contains(0x43));
 	}
 
 	#[test]
 	fn test_sei() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![SEI, 0x00]);
+		cpu.interpret(vec![SEI.code, 0x00]);
 		assert!(cpu.status.get_interrupt());
 	}
 
 	#[test]
 	fn test_sed() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![SED, 0x00]);
+		cpu.interpret(vec![SED.code, 0x00]);
 		assert!(cpu.status.get_decimal());
 	}
 
 	#[test]
 	fn test_sec() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![SEC, 0x00]);
+		cpu.interpret(vec![SEC.code, 0x00]);
 		assert!(cpu.status.get_carry());
 	}
 
 	#[test]
 	fn test_sbc_overflow() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 1, SBC, 3, 0x00]);
+		cpu.interpret(vec![0xa9, 1, SBC1.code, 3, 0x00]);
 		assert_eq!(cpu.register_a, 253);
 		assert!(!cpu.status.get_carry());
 	}
@@ -1171,7 +1094,7 @@ mod test {
 	#[test]
 	fn test_sbc_no_overflow() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0xff, SBC, 3, 0x00]);
+		cpu.interpret(vec![0xa9, 0xff, SBC1.code, 3, 0x00]);
 		assert_eq!(cpu.register_a, 251);
 		assert!(cpu.status.get_carry());
 	}
@@ -1179,14 +1102,14 @@ mod test {
 	#[test]
 	fn test_rts_empty() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![RTS, 0x00]);
+		cpu.interpret(vec![RTS.code, 0x00]);
 		assert_eq!(cpu.stack_pointer, 255);
 	}
 
 	#[test]
 	pub fn test_ror() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b1000_0001, ROR, 0x00]);
+		cpu.interpret(vec![0xa9, 0b1000_0001, ROR_A.code, 0x00]);
 		assert_eq!(cpu.register_a, 64);
 		assert!(cpu.status.get_carry())
 	}
@@ -1194,7 +1117,7 @@ mod test {
 	#[test]
 	pub fn test_rol() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b1000_0001, ROL, 0x00]);
+		cpu.interpret(vec![0xa9, 0b1000_0001, ROL_A.code, 0x00]);
 		assert_eq!(cpu.register_a, 2);
 		assert!(cpu.status.get_carry())
 	}
@@ -1202,28 +1125,28 @@ mod test {
 	#[test]
 	fn test_php() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 16, PHP, 0x00]);
+		cpu.interpret(vec![0xa9, 16, PHP.code, 0x00]);
 		assert!(cpu.bus.vram_contains(*cpu.status | 0b0011_0000))
 	}
 
 	#[test]
 	fn test_pha() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 16, PHA, 0x00]);
+		cpu.interpret(vec![0xa9, 16, PHA.code, 0x00]);
 		assert!(cpu.bus.vram_contains(16));
 	}
 
 	#[test]
 	fn test_ora() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0x08, ORA, 0x07, 0x00]);
+		cpu.interpret(vec![0xa9, 0x08, ORA1.code, 0x07, 0x00]);
 		assert_eq!(cpu.register_a, 15);
 	}
 
 	#[test]
 	fn test_lsr_a() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 5, LSR, 0x00]);
+		cpu.interpret(vec![0xa9, 5, LSR_A.code, 0x00]);
 		assert_eq!(cpu.register_a, 2);
 		assert!(cpu.status.get_carry())
 	}
@@ -1231,7 +1154,7 @@ mod test {
 	#[test]
 	fn test_ldy_load_data() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![LDY, 0x43, 0x00]);
+		cpu.interpret(vec![LDY1.code, 0x43, 0x00]);
 		assert_eq!(cpu.register_y, 0x43);
 		assert!(*cpu.status & 0b0000_0010 == 0b00);
 		assert!(*cpu.status & 0b1000_0000 == 0);
@@ -1240,14 +1163,14 @@ mod test {
 	#[test]
 	fn test_ldy_zero_flag() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![LDY, 0x00, 0x00]);
+		cpu.interpret(vec![LDY1.code, 0x00, 0x00]);
 		assert!(*cpu.status & 0b0000_0010 == 0b10);
 	}
 
 	#[test]
 	fn test_ldx_load_data() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![LDX, 0x43, 0x00]);
+		cpu.interpret(vec![LDX1.code, 0x43, 0x00]);
 		assert_eq!(cpu.register_x, 0x43);
 		assert!(*cpu.status & 0b0000_0010 == 0b00);
 		assert!(*cpu.status & 0b1000_0000 == 0);
@@ -1256,14 +1179,14 @@ mod test {
 	#[test]
 	fn test_ldx_zero_flag() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![LDX, 0x00, 0x00]);
+		cpu.interpret(vec![LDX1.code, 0x00, 0x00]);
 		assert!(*cpu.status & 0b0000_0010 == 0b10);
 	}
 
 	#[test]
 	fn test_lda_load_data() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![LDA, 0x43, 0x00]);
+		cpu.interpret(vec![LDA1.code, 0x43, 0x00]);
 		assert_eq!(cpu.register_a, 0x43);
 		assert!(*cpu.status & 0b0000_0010 == 0b00);
 		assert!(*cpu.status & 0b1000_0000 == 0);
@@ -1272,14 +1195,15 @@ mod test {
 	#[test]
 	fn test_lda_zero_flag() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![LDA, 0x00, 0x00]);
+		cpu.interpret(vec![LDA1.code, 0x00, 0x00]);
 		assert!(*cpu.status & 0b0000_0010 == 0b10);
 	}
 
 	#[test]
 	fn test_lax() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xA7, 0x00]);
+		cpu.register_a = 16;
+		cpu.interpret(vec![LAX1.code, 0x00]);
 		assert_eq!(cpu.register_a, cpu.register_x);
 	}
 
@@ -1296,56 +1220,56 @@ mod test {
 	#[test]
 	fn test_iny_increment() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![INY, 0x00]);
+		cpu.interpret(vec![INY.code, 0x00]);
 		assert_eq!(cpu.register_y, 1)
 	}
 
 	#[test]
 	fn test_iny_overflow() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa0, 0xff, INY, 0x00]);
+		cpu.interpret(vec![0xa0, 0xff, INY.code, 0x00]);
 		assert_eq!(cpu.register_y, 0)
 	}
 
 	#[test]
 	fn test_inx_increment() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![INX, 0x00]);
+		cpu.interpret(vec![INX.code, 0x00]);
 		assert_eq!(cpu.register_x, 1)
 	}
 
 	#[test]
 	fn test_inx_overflow() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0xff, 0xaa, INX, INX, 0x00]);
+		cpu.interpret(vec![0xa9, 0xff, 0xaa, INX.code, INX.code, 0x00]);
 		assert_eq!(cpu.register_x, 1)
 	}
 
 	#[test]
 	fn test_eor() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b0000_0001, EOR, 0b0000_0011, 0x00]);
+		cpu.interpret(vec![0xa9, 0b0000_0001, EOR1.code, 0b0000_0011, 0x00]);
 		assert_eq!(cpu.register_a, 0b0000_0010);
 	}
 
 	#[test]
 	fn test_dey_decrement() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xA0, 10, DEY, 0x00]);
+		cpu.interpret(vec![0xA0, 10, DEY.code, 0x00]);
 		assert_eq!(cpu.register_y, 9)
 	}
 
 	#[test]
 	fn test_dex_decrement() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 10, 0xaa, DEX, 0x00]);
+		cpu.interpret(vec![0xa9, 10, 0xaa, DEX.code, 0x00]);
 		assert_eq!(cpu.register_x, 9)
 	}
 
 	#[test]
 	fn test_cpy_less() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xA0, 5, CPY, 3, 0x00]);
+		cpu.interpret(vec![0xA0, 5, CPY1.code, 3, 0x00]);
 		assert!(cpu.status.get_carry());
 		assert!(!cpu.status.get_zero());
 	}
@@ -1353,7 +1277,7 @@ mod test {
 	#[test]
 	fn test_cpy_equal() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xA0, 5, CPY, 5, 0x00]);
+		cpu.interpret(vec![0xA0, 5, CPY1.code, 5, 0x00]);
 		assert!(cpu.status.get_carry());
 		assert!(cpu.status.get_zero());
 	}
@@ -1361,7 +1285,7 @@ mod test {
 	#[test]
 	fn test_cpx_less() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa2, 5, CPX, 3, 0x00]);
+		cpu.interpret(vec![0xa2, 5, CPX1.code, 3, 0x00]);
 		assert!(cpu.status.get_carry());
 		assert!(!cpu.status.get_zero());
 	}
@@ -1369,7 +1293,7 @@ mod test {
 	#[test]
 	fn test_cpx_equal() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa2, 5, CPX, 5, 0x00]);
+		cpu.interpret(vec![0xa2, 5, CPX1.code, 5, 0x00]);
 		assert!(cpu.status.get_carry());
 		assert!(cpu.status.get_zero());
 	}
@@ -1377,7 +1301,7 @@ mod test {
 	#[test]
 	fn test_cmp_less() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 5, CMP, 3, 0x00]);
+		cpu.interpret(vec![0xa9, 5, CMP1.code, 3, 0x00]);
 		assert!(cpu.status.get_carry());
 		assert!(!cpu.status.get_zero());
 	}
@@ -1385,7 +1309,7 @@ mod test {
 	#[test]
 	fn test_cmp_equal() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 5, CMP, 5, 0x00]);
+		cpu.interpret(vec![0xa9, 5, CMP1.code, 5, 0x00]);
 		assert!(cpu.status.get_carry());
 		assert!(cpu.status.get_zero());
 	}
@@ -1393,98 +1317,98 @@ mod test {
 	#[test]
 	fn test_overflow_clear() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![CLV, 0x00]);
+		cpu.interpret(vec![CLV.code, 0x00]);
 		assert!(!cpu.status.get_overflow())
 	}
 
 	#[test]
 	fn test_interrupt_clear() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![CLI, 0x00]);
+		cpu.interpret(vec![CLI.code, 0x00]);
 		assert!(!cpu.status.get_interrupt())
 	}
 
 	#[test]
 	fn test_decimal_clear() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![CLD, 0x00]);
+		cpu.interpret(vec![CLD.code, 0x00]);
 		assert!(!cpu.status.get_decimal())
 	}
 
 	#[test]
 	fn test_carry_clear() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0xff, 0x0a, CLC, 0x00]);
+		cpu.interpret(vec![0xa9, 0xff, 0x0a, CLC.code, 0x00]);
 		assert!(!cpu.status.get_carry())
 	}
 
 	#[test]
 	fn test_bvs_clear() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![BVS, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![BVS.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 0)
 	}
 
 	#[test]
 	fn test_bvs_set() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0x50, 0x69, 0x50, BVS, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 0x50, 0x69, 0x50, BVS.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 4)
 	}
 
 	#[test]
 	fn test_bvc_clear() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![BVC, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![BVC.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 4)
 	}
 
 	#[test]
 	fn test_bvc_set() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0x50, 0x69, 0x50, BVC, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 0x50, 0x69, 0x50, BVC.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 0x50 + 0x50)
 	}
 
 	#[test]
 	fn test_bpl_negative() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b1000_0000, BPL, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 0b1000_0000, BPL.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 0b1000_0000)
 	}
 
 	#[test]
 	fn test_bpl_positive() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b0000_0000, BPL, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 0b0000_0000, BPL.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 4)
 	}
 
 	#[test]
 	fn test_bne_zero() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0, BNE, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 0, BNE.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 0)
 	}
 
 	#[test]
 	fn test_bne_not_zero() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 1, BNE, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 1, BNE.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 4)
 	}
 
 	#[test]
 	fn test_bmi_negative() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b1000_0000, BMI, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 0b1000_0000, BMI.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 4)
 	}
 
 	#[test]
 	fn test_bmi_positive() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b0000_0000, BMI, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 0b0000_0000, BMI.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 0)
 	}
 
@@ -1492,49 +1416,49 @@ mod test {
 	#[test]
 	fn test_beq_zero() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0, BEQ, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 0, BEQ.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 4)
 	}
 
 	#[test]
 	fn test_beq_not_zero() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 1, BEQ, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 1, BEQ.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 1)
 	}
 
 	#[test]
 	fn test_bcs_clear() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![BCS, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![BCS.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 0)
 	}
 
 	#[test]
 	fn test_bcs_set() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0xff, 0x69, 1, BCS, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 0xff, 0x69, 1, BCS.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 4)
 	}
 
 	#[test]
 	fn test_bcc_clear() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![BCC, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![BCC.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 4)
 	}
 
 	#[test]
 	fn test_bcc_set() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0xff, 0x69, 1, BCC, 0x00, 0x00, 0xa9, 4, 0x00]);
+		cpu.interpret(vec![0xa9, 0xff, 0x69, 1, BCC.code, 0x00, 0x00, 0xa9, 4, 0x00]);
 		assert_eq!(cpu.register_a, 0)
 	}
 
 	#[test]
 	fn test_axs() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b0000_1111, 0xa2, 0b0000_0111, AXS, 0b0000_0001, 0x00]);
+		cpu.interpret(vec![0xa9, 0b0000_1111, 0xa2, 0b0000_0111, AXS.code, 0b0000_0001, 0x00]);
 		assert_eq!(cpu.register_x, 0b0000_0110)
 	}
 
@@ -1548,14 +1472,14 @@ mod test {
 	#[test]
 	fn test_axa_absolute() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b1100_0110, 0xa2, 0b0110_0011, AXA, 0x00]);
+		cpu.interpret(vec![0xa9, 0b1100_0110, 0xa2, 0b0110_0011, AXA1.code, 0x00]);
 		assert!(cpu.bus.vram_contains(0b0000_0010));
 	}
 
 	#[test]
 	fn test_atx() {
 		let mut cpu = Cpu::new();
-		cpu.interpret(vec![0xa9, 0b1100_1111, ATX, 0b1001_0010, 0x00]);
+		cpu.interpret(vec![0xa9, 0b1100_1111, ATX.code, 0b1001_0010, 0x00]);
 		assert_eq!(cpu.register_a, cpu.register_x);
 		assert_eq!(cpu.register_x, 0b1000_0010)
 	}
